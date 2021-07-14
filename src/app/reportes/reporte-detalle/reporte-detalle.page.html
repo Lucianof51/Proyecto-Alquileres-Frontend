@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reportes">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{reporte?.id}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deleteReporte()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+        <ion-label>Propiedad</ion-label>
+        <ion-label>Proveedor</ion-label>
+        <ion-label>Estado</ion-label>
+        <ion-label>Imagen</ion-label>
+       </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+       <ion-list>
+         <ion-item>
+          <ion-label>{{propiedad?.ubicacion}}</ion-label>
+          <ion-label>{{proveedor?.nombre}}</ion-label>
+          <ion-label>{{reporte?.estado}}</ion-label>
+          <ion-label>{{reporte?.imagenDamage}}</ion-label>
+         </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

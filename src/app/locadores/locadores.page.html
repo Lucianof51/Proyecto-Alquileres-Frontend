@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Locadores
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="globe"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor='let locador of locadores'>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-button slot="end" color="success" (click)="updateLocador(locador.id)">UPDATE</ion-button>
+      <ion-button slot="end" color="primary" (click)="verLocador(locador.id)">VER</ion-button>
+      <ion-label>{{locador.nombre}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="addNewLocador()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

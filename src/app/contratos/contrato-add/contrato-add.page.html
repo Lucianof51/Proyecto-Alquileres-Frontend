@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nuevo contrato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="number" placeholder="Valor" #valor2></ion-input>
+      <ion-input slot="start" type="number" placeholder="Honorarios" #honorarios2>Honorarios en %</ion-input>
+      <ion-input type="number" placeholder="Punitorios" #punitorios2></ion-input>
+      <ion-input type="date" #fecha_ingreso2>Fecha de ingreso:</ion-input>
+      <ion-input type="date" #fecha_egreso2>Fecha de egreso:</ion-input>
+      <ion-input type="date" placeholder="Fecha de rescision" #fecha_rescision2>Fecha de rescisión:</ion-input>
+      <ion-input type="text" placeholder="Tipo de contrato" #tipo_contrato2></ion-input>
+      <ion-input type="date" #vencimiento_pago2>Vencimiento de pago:</ion-input>
+  <ion-item>
+    <ion-label>Propiedad</ion-label>
+    <ion-select [(ngModel)]="propiedad.id" #propiedad=ngModel>
+      <ion-select-option *ngFor="let propiedad of propiedades" value="{{propiedad.id}}">{{propiedad.ubicacion}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+    
+  <ion-item>
+    <ion-label>Locador</ion-label>
+    <ion-select [(ngModel)]="locador.id" #locador=ngModel>
+      <ion-select-option *ngFor="let locador of locadores" value="{{locador.id}}">{{locador.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Inquilino</ion-label>
+    <ion-select [(ngModel)]="inquilino.id" #inquilino=ngModel>
+      <ion-select-option *ngFor="let inquilino of inquilinos" value="{{inquilino.id}}">{{inquilino.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+<ion-item>
+  <ion-label>Garante</ion-label>
+  <ion-select [(ngModel)]="garante.id" #garante=ngModel>
+    <ion-select-option *ngFor="let garante of garantes" value="{{garante.id}}">{{garante.nombre}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<ion-button color="primary" (click)="saveNewContrato(valor2, honorarios2, punitorios2, fecha_ingreso2, fecha_egreso2, fecha_rescision2, tipo_contrato2, vencimiento_pago2, propiedad, locador, inquilino, garante)">SAVE</ion-button>
+</ion-card-content>
+</ion-card>
+</ion-content>

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   <ion-button (click)="detalle_caja()" size="large" expand="full">Detalle de caja</ion-button>
+   <ion-button (click)="lista_alquileres()" size="large" expand="full" color="secondary">Lista de alquileres</ion-button>
+   <ion-button (click)="reportes()" size="large" expand="full" color="danger">Reportes</ion-button>
+   <ion-button (click)="avisos()" size="large" expand="full" color="success">Avisos</ion-button>
+</ion-content>

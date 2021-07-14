@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nuevo aviso</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/avisos">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Locador</ion-label>
+    <ion-select [(ngModel)]="locador.id" #locador=ngModel>
+      <ion-select-option *ngFor="let locador of locadores" value="{{locador.id}}">{{locador.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+<ion-item>
+  <ion-label>Inquilino</ion-label>
+  <ion-select [(ngModel)]="inquilino.id" #inquilino=ngModel>
+    <ion-select-option *ngFor="let inquilino of inquilinos" value="{{inquilino.id}}">{{inquilino.nombre}}</ion-select-option>
+  </ion-select>
+
+</ion-item>
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="text" placeholder="Motivo" #motivo2></ion-input>
+      <ion-input type="text" placeholder="Descripción" #descripcion2></ion-input>
+      <ion-input type="date" #fecha2>Fecha de creación:</ion-input>
+
+<ion-button color="primary" (click)="saveNewAvisos(locador, inquilino, motivo2, descripcion2, fecha2)">SAVE</ion-button>
+</ion-card-content>
+</ion-card>
+</ion-content>

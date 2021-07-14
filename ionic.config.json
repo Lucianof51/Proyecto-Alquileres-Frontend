@@ -1,0 +1,7 @@
+{
+  "name": "proyecto_alquileres",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

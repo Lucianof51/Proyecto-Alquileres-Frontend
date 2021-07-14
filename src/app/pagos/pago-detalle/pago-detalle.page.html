@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagos">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pago?.id}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deletePago()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h4>Fecha de pago: {{pago?.fecha_pago}}</h4>
+      <h4>Monto: {{pago?.monto}}</h4>
+      <h4>Honorarios: {{pago?.honorarios}}</h4>
+      <h4>Punitorios: {{pago?.punitorios}}</h4>
+      <h4>Agua: {{pago?.agua}}</h4>
+      <h4>Gas: {{pago?.gas}}</h4>
+      <h4>Luz: {{pago?.luz}}</h4>
+      <h4>Expensas: {{pago?.expensas}}</h4>
+    </ion-col>
+  </ion-row>
+   
+</ion-grid>
+</ion-content>

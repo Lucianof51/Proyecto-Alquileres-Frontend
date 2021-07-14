@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/propiedades">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{propiedades?.ubicacion}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deletePlace()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h3>Ubicacion: {{propiedades?.ubicacion}}</h3>
+    </ion-col>
+  </ion-row>
+    <h3>Estado: {{propiedades?.estado}}</h3>
+  <ion-row>
+      <h3>Tipo de propiedad: {{propiedades?.tipo}}</h3>
+  </ion-row>
+</ion-grid>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reportes">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar reporte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-row>
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="text" placeholder="Descripción" #descripcion2></ion-input>
+      <ion-input type="text" placeholder="Estado" #estado2></ion-input>
+      <ion-input type="date" #fecha2>Fecha de creación:</ion-input>
+      <ion-item>
+        <ion-label>Proveedor</ion-label>
+        <ion-select [(ngModel)]="proveedor.id" #proveedor=ngModel>
+          <ion-select-option *ngFor="let proveedor of proveedores" value="{{proveedor.id}}">{{proveedor.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+    <ion-item>
+      <ion-label>Propiedad</ion-label>
+      <ion-select [(ngModel)]="propiedad.id" #propiedad=ngModel>
+        <ion-select-option *ngFor="let propiedad of propiedades" value="{{propiedad.id}}">{{propiedad.ubicacion}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+      <ion-button color="primary" (click)="saveReporte(descripcion2, estado2, fecha2, proveedor, propiedad)">
+      SAVE</ion-button>
+     </ion-card-content>
+  </ion-card>
+</ion-row>
+</ion-content>

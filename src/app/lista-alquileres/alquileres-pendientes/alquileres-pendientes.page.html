@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lista-alquileres">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Alquileres pendientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item *ngFor="let pago of pagos">
+  <ion-label>{{pago.propiedadName}}</ion-label>
+</ion-item>
+</ion-content>

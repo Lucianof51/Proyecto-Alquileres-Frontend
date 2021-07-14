@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+     Propiedades
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="globe"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor='let propiedad of propiedades'>
+      <ion-icon slot="start" name="home-outline"></ion-icon>
+      <ion-button slot="end" color="success" (click)="updatePropiedad(propiedad.id)">UPDATE</ion-button>
+      <ion-button slot="end" color="primary" (click)="verPropiedad(propiedad.id)">VER</ion-button>
+      <ion-label>{{propiedad.ubicacion}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="addNewPlace()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

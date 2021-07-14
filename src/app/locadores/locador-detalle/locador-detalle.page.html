@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/locadores">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{locador?.nombre}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deleteLocador()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h3>Nombre: {{locador?.nombre}}</h3>
+    </ion-col>
+  </ion-row>
+    <h3>Apellido: {{locador?.apellido}}</h3>
+  <ion-row>
+      <h3>DNI: {{locador?.DNI}}</h3>
+  </ion-row>
+</ion-grid>
+</ion-content>

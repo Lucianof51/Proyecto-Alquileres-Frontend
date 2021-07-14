@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lista-alquileres">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Alquileres a vencer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+        <ion-label>Propiedad</ion-label>
+        <ion-label>Fecha de egreso</ion-label>
+       </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+       <ion-list>
+          <ion-item *ngFor="let contrato of contratos" >
+            <ion-label>{{contrato.propiedadName}}</ion-label>
+            <ion-label>{{contrato.fecha_egreso}}</ion-label>
+          </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

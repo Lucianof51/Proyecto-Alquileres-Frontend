@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/contratos">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{contrato?.id}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deleteContrato()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+        <ion-label>ID</ion-label>
+        <ion-label>Valor</ion-label>
+        <ion-label>Locador</ion-label>
+       </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+       <ion-list>
+         <ion-item>
+          <ion-label>{{contratos?.id}}</ion-label>
+          <ion-label>{{contratos?.valor}}</ion-label>
+          <ion-label>{{locador?.nombre}}</ion-label>
+         </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

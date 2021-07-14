@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/avisos">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{aviso?.id}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deleteAviso()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+        <ion-label>Locador</ion-label>
+        <ion-label>Inquilino</ion-label>
+        <ion-label>Descripcion</ion-label>
+       </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+       <ion-list>
+         <ion-item>
+          <ion-label>{{locador?.nombre}}</ion-label>
+          <ion-label>{{inquilino?.nombre}}</ion-label>
+          <ion-label>{{aviso?.descripcion}}</ion-label>
+         </ion-item>
+       </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

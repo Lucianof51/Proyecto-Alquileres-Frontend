@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inquilinos">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar inquilino</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-row>
+  <ion-card>
+    <ion-card-content>
+      <ion-input type="text" placeholder="Nombre" #nombre2></ion-input>
+      <ion-input type="text" placeholder="Apellido" #apellido2></ion-input>
+      <ion-input type="text" placeholder="DNI" #DNI2></ion-input>
+      <ion-input type="number" placeholder="CUIT" #CUIT2></ion-input>
+      <ion-input type="number" placeholder="Telefono" #telefono2></ion-input>
+      <ion-input type="text" placeholder="Dirección" #direccion2></ion-input>
+      <ion-input type="email" placeholder="Email" #email2></ion-input>
+      <ion-input type="text" placeholder="Cuenta Bancaria" #cuentaBancaria2></ion-input>
+      <ion-button color="primary" (click)="saveInquilino(nombre2, apellido2, DNI2, CUIT2, telefono2, direccion2, email2, cuentaBancaria2)">
+      UPDATE</ion-button>
+     </ion-card-content>
+  </ion-card>
+</ion-row>
+</ion-content>

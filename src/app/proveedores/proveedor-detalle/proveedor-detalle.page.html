@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/proveedores">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{proveedor?.nombre}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="deleteProveedor()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h3>Nombre: {{proveedor?.nombre}}</h3>
+    </ion-col>
+  </ion-row>
+    <h3>Apellido: {{proveedor?.apellido}}</h3>
+  <ion-row>
+      <h3>DNI: {{proveedor?.DNI}}</h3>
+  </ion-row>
+</ion-grid>
+</ion-content>
+

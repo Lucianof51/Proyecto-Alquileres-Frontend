@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+     Inquilinos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="globe"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor='let inquilino of inquilinos'>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-button slot="end" color="success" (click)="updateInquilino(inquilino.id)">UPDATE</ion-button>
+      <ion-button slot="end" color="primary" (click)="verInquilino(inquilino.id)">VER</ion-button>
+      <ion-label>{{inquilino.nombre}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="addNewInquilino()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
