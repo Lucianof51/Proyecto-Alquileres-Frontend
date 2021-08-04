@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/garantes">
       </ion-back-button>
@@ -10,7 +10,7 @@
 
 <ion-content>
 <ion-row>
-  <ion-card>
+  <ion-card color="dark">
     <ion-card-content>
       <ion-input type="text" placeholder="Nombre" #nombre2></ion-input>
       <ion-input type="text" placeholder="Apellido" #apellido2></ion-input>
@@ -21,7 +21,7 @@
       <ion-input type="email" placeholder="Email" #email2></ion-input>
       <ion-input type="text" placeholder="Cuenta Bancaria" #cuentaBancaria2></ion-input>
       <ion-button color="primary" (click)="saveNewGarante(nombre2, apellido2, DNI2, CUIT2, telefono2, direccion2, email2, cuentaBancaria2)">
-      SAVE</ion-button>
+      AGREGAR</ion-button>
      </ion-card-content>
   </ion-card>
 </ion-row>

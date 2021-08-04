@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="colortres">
     <ion-title>Nuevo reporte</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/reportes">
@@ -9,10 +9,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
+  <ion-card color="dark">
+    <ion-card-content color="dark">
       <ion-input type="text" placeholder="Descripción" #descripcion2></ion-input>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label>Estado</ion-label>
         <ion-select [(ngModel)]="Estado" #estado2=ngModel>
           <ion-select-option value="Pendiente">Pendiente</ion-select-option>
@@ -21,27 +21,34 @@
       </ion-item>
       <ion-input type="date" #fecha2>Fecha de creación:</ion-input>
 
-  <ion-item>
+  <ion-item color="dark">
       <ion-label>Proveedor</ion-label>
       <ion-select [(ngModel)]="proveedor.id" #proveedor=ngModel>
         <ion-select-option *ngFor="let proveedor of proveedores" value="{{proveedor.id}}">{{proveedor.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
 
-  <ion-item>
+  <ion-item color="dark">
     <ion-label>Propiedad</ion-label>
     <ion-select [(ngModel)]="propiedad.id" #propiedad=ngModel>
       <ion-select-option *ngFor="let propiedad of propiedades" value="{{propiedad.id}}">{{propiedad.ubicacion}}</ion-select-option>
     </ion-select>
   </ion-item>
-<ion-item text-center>
-  <button ion-button icon-left large (click)="abrirGaleria()">
-    <ion-icon name="images"></ion-icon>
-    Añadir imagen
-  </button>
-</ion-item>
-
-<ion-button color="primary" (click)="saveNewReporte(descripcion2, estado2, fecha2, proveedor, propiedad)">SAVE</ion-button>
+ <br>
+  <ion-input type="number" placeholder="Costo" #costo2></ion-input>
+  <br>
+  <ion-item color="colorcuatro">
+    <ion-label>¿Desea adjuntar una imagen?</ion-label>
+    <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check4></ion-checkbox>
+  </ion-item>
+  <ion-item disabled="{{!check4}}" color="dark">
+    <ion-label>
+      Imagen
+      <ion-input type="file" (change)="onCoverChanged($event)"></ion-input>
+    </ion-label>
+  </ion-item>
+  
+<ion-button color="primary" (click)="saveNewReporte(descripcion2, estado2, fecha2, proveedor, propiedad, costo2)">GUARDAR</ion-button>
 </ion-card-content>
 </ion-card>
 </ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/detalle_caja">
       </ion-back-button>
@@ -9,26 +9,25 @@
   </ion-header>
 
 <ion-content>
- <ion-grid>
-   <ion-row>
-     <ion-col>
-       <ion-list>
-         <ion-item>
-       <ion-label>Fecha de pago</ion-label>
+         <ion-item color="dark">
+       <ion-label text-wrap>Fecha de registro</ion-label>
+       <pre>    </pre>
        <ion-label>Ingreso</ion-label>
+       <ion-label>Egreso</ion-label>
       </ion-item>
-      </ion-list>
-     </ion-col>
-   </ion-row>
-   <ion-row>
-     <ion-col>
-      <ion-list>
-        <ion-item *ngFor='let pago of pagos'>
-         <ion-label>{{pago.fecha_pago}}</ion-label>
-         <ion-label>{{pago.monto}}</ion-label>
-        </ion-item>
-      </ion-list>
-     </ion-col>
-   </ion-row>
- </ion-grid>
+
+        <ion-item-group *ngFor='let movimiento of movimientos; index as i'>
+         <ion-item *ngIf="(i+1)%2 == 0" color="color">
+          <ion-label>{{movimiento.fechaPago}}</ion-label>
+          <pre>   </pre>
+          <ion-label (click)="mostrarPago(movimiento.id2, movimiento.contrato)">{{movimiento.monto}}</ion-label>
+          <ion-label (click)="mostrarReporte(movimiento.id)">{{movimiento.costo}}</ion-label>
+         </ion-item>
+         <ion-item *ngIf="(i+1)%2 != 0" color="colordos">
+          <ion-label>{{movimiento.fechaPago}}</ion-label>
+          <pre>   </pre>
+          <ion-label (click)="mostrarPago(movimiento.id2, movimiento.contrato)">{{movimiento.monto}}</ion-label>
+          <ion-label (click)="mostrarReporte(movimiento.id)">{{movimiento.costo}}</ion-label>
+         </ion-item>
+        </ion-item-group>
 </ion-content>

@@ -5,6 +5,7 @@ import { PropiedadesService } from '../propiedades/propiedades.service';
 import { Contrato } from './contrato.model';
 import { Propiedad } from '../propiedades/propiedad.model';
 import { ContratosPropiedades } from './contratosPropiedades.model';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contratos',
@@ -12,7 +13,7 @@ import { ContratosPropiedades } from './contratosPropiedades.model';
   styleUrls: ['./contratos.page.scss'],
 })
 export class ContratosPage implements OnInit {
-  constructor(private contratosService: ContratosService, private router: Router, private propiedadesService: PropiedadesService) { }
+  constructor(private menuCtrl: MenuController, private contratosService: ContratosService, private router: Router, private propiedadesService: PropiedadesService) { }
   contratos: Contrato[];
   propiedades: Propiedad[];
   contratosPropiedades: ContratosPropiedades;
@@ -46,7 +47,7 @@ export class ContratosPage implements OnInit {
       console.log(this.contratos)
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
    // this.contratosService.guardarDatos();
     this.contratos = this.contratosService.guardarDatos().map(contrato => {
       return {
@@ -86,4 +87,7 @@ export class ContratosPage implements OnInit {
   verContrato(contratoId){
     this.router.navigate(['/contratos', contratoId]);
   }
+  toggleMenu() {
+    this.menuCtrl.toggle();
+   }
 }

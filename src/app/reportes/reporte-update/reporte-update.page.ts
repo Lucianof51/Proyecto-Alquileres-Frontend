@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { PropiedadesService } from 'src/app/propiedades/propiedades.service';
 import { ProveedoresService } from 'src/app/proveedores/proveedores.service';
 import { ReporteService } from '../reporte.service';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-reporte-update',
@@ -12,11 +14,15 @@ import { ReporteService } from '../reporte.service';
 export class ReporteUpdatePage implements OnInit {
   propiedades = [];
   proveedores = [];
+  habilitar: boolean = false;
+  cover: File;
   constructor(private reporteService: ReporteService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private propiedadesService: PropiedadesService,
-              private proveedorService: ProveedoresService) { }
+              private proveedorService: ProveedoresService,
+              private alertCtrl: AlertController,
+              private http: HttpClient) { }
 
 id2: any;
 ngOnInit() {
@@ -38,28 +44,49 @@ this.id2 = recipeId;
 });
 }
 
+onCoverChanged(event: any){
+  this.cover = event.target.files[0];
+  this.habilitar = true;
+}
+
 // tslint:disable-next-line:max-line-length
-saveReporte(descripcion2: HTMLInputElement, estado2: HTMLInputElement, fecha2: HTMLInputElement, proveedor2: HTMLInputElement, propiedad2: HTMLInputElement){
+  async saveNewReporte(descripcion2: HTMLInputElement, estado2: HTMLInputElement, fecha2: HTMLInputElement, proveedor2: HTMLInputElement, propiedad2: HTMLInputElement, costo2){
 const descripcion = descripcion2.value;
 const estado = estado2.value;
 const fecha = fecha2.value;
 const proveedor = proveedor2.value;
 const propiedad = propiedad2.value;
 const id = this.id2;
-
-const val = {
-id,
-descripcion,
-estado,
-fecha,
-proveedor,
-propiedad
-};
-this.reporteService.updateReporte(val).subscribe(res => {
-alert(res.toString());
-});
-
-console.log(val);
+const costo = costo2.value
+const uploadData = new FormData();
+uploadData.append('id', id);
+uploadData.append('descripcion', descripcion);
+uploadData.append('estado', estado);
+uploadData.append('fecha', fecha);
+uploadData.append('proveedor', proveedor);
+uploadData.append('propiedad', propiedad);
+uploadData.append('costo', costo);
+if(this.habilitar)
+{
+  uploadData.append('cover', this.cover, this.cover.name);
 }
+this.http.put('http://127.0.0.1:8000/reporteprueba/' + id, uploadData).subscribe(
+  data => console.log(data),
+  error => console.log(error)
+);
 
+const alertElement = await this.alertCtrl.create({
+  header: 'Reporte actualizado',
+  message: 'El reporte se ha actualizado con exito',
+  buttons: [
+    {
+      text: 'OK',
+      handler: () => {
+        this.router.navigate(['/reportes']);
+      }
+    }
+  ]
+ });
+ await alertElement.present();
+}
 }

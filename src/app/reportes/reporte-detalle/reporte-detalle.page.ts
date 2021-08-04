@@ -33,6 +33,7 @@ export class ReporteDetallePage implements OnInit {
      this.reporte = data;
      this.proveedorId = this.reporte.proveedor;
      this.propiedadId = this.reporte.propiedad;
+     console.log(this.reporte);
    });
    });
  }

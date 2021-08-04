@@ -11,7 +11,7 @@ import { LocadoresService } from '../locadores.service';
 export class LocadorUpdatePage implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private activatedRoute: ActivatedRoute, private locadorService: LocadoresService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private locadorService: LocadoresService, private router: Router, private alertCtrl: AlertController) { }
   id2: any;
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -26,7 +26,7 @@ export class LocadorUpdatePage implements OnInit {
 }
 
 // tslint:disable-next-line:max-line-length
-saveLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -55,8 +55,21 @@ saveLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLIn
     this.locadorService.updateLocador(val).subscribe(res => {
        alert(res.toString());
    });
+   const alertElement = await this.alertCtrl.create({
+    header: 'Locador actualizado',
+    message: 'El locador se ha actualizado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/locadores']);
+        }
+      }
+    ]
+   });
+   await alertElement.present();
+       console.log(val);
 
-    console.log(val);
 }
 }
 

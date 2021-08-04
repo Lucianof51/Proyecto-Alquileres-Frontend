@@ -14,26 +14,37 @@ export class ReporteService {
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   getReportes(): Observable<any> {
-    return this.http.get(this.APIurl + '/reporte?format=json', { headers: this.httpHeaders });
+    return this.http.get(this.APIurl + '/reporteprueba?format=json', { headers: this.httpHeaders });
   }
 
   addReporte(val: any){
     console.log(val);
-    return this.http.post(this.APIurl + '/reporte', val);
+    return this.http.post(this.APIurl + '/reporteprueba', val);
 }
 
 deleteReporte(reporteId){
-  return this.http.delete(this.APIurl + '/reporte/' + reporteId, { headers: this.httpHeaders }).toPromise()
+  return this.http.delete(this.APIurl + '/reporteprueba/' + reporteId, { headers: this.httpHeaders }).toPromise()
   .then(() => {
     this.getReportes();
   });
 }
 
   getReporte(reporteId): Observable<any> {
-    return this.http.get(this.APIurl + '/reporte/' + reporteId, { headers: this.httpHeaders });
+    return this.http.get(this.APIurl + '/reporteprueba/' + reporteId, { headers: this.httpHeaders });
   }
 
 updateReporte(reporte): Observable<any> {
-  return this.http.put(this.APIurl + '/reporte/' + reporte.id, reporte);
+  return this.http.put(this.APIurl + '/reporteprueba/' + reporte.id, reporte);
+}
+
+guardarDatos(){
+  this.getReportes().subscribe(data => {
+    this.reporte = data;
+  });
+  return this.reporte;
+}
+
+public getFechaReporte(){
+  this.reporte = this.guardarDatos();
 }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProveedoresService } from './proveedores.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-proveedores',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProveedoresPage implements OnInit {
 
-  constructor(private proveedoresService: ProveedoresService, private router: Router) { }
+  constructor(private proveedoresService: ProveedoresService, private router: Router , private menuCtrl: MenuController) { }
   proveedores = [];
   ngOnInit() {
     this.proveedoresService.getProveedores()
@@ -33,5 +34,22 @@ export class ProveedoresPage implements OnInit {
     }
   verProveedor(proveedorId){
     this.router.navigate(['/proveedores', proveedorId]);
+    }
+
+    toggleMenu() {
+      this.menuCtrl.toggle();
+     }
+  
+  doRefresh(event) {
+      console.log('Begin async operation');
+      this.proveedoresService.getProveedores()
+      .subscribe(data => {
+        console.log(data);
+        this.proveedores = data;
+      });
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        event.target.complete();
+      }, 2000);
     }
 }

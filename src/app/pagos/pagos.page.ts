@@ -29,6 +29,7 @@ export class PagosPage implements OnInit {
       this.id = recipeId;
       this.pagoService.getPagos()
     .subscribe(data => {
+      this.pagos = data;
       this.pagos = this.pagoService.getPagoContrato(this.id);
     });
       this.pagoService.guardarDatos();
@@ -60,8 +61,8 @@ export class PagosPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  updatePago(pagoId){
-    this.router.navigate(['/pago-update', pagoId]);
+  updatePagos(pagoId){
+    this.router.navigate(['/pago-update', this.id, pagoId]);
     }
   verPagos(pagoId){
     this.router.navigate(['/pagos', this.id, pagoId]);

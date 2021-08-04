@@ -5,4 +5,6 @@ export interface Reporte {
     fecha: Date;
     proveedor: number;
     propiedad: number;
+    costo: number;
+    imagenDamage: string;
 }

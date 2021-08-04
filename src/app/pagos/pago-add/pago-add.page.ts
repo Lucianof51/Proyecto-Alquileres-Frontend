@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContratosService } from 'src/app/contratos/contratos.service';
 import { PagosService } from '../pagos.service';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-pago-add',
   templateUrl: './pago-add.page.html',
@@ -12,9 +12,10 @@ import { PagosService } from '../pagos.service';
 export class PagoAddPage implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private contratoService: ContratosService, private pagoService: PagosService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private contratoService: ContratosService, private pagoService: PagosService, private alertCtrl: AlertController) { }
   id: any;
   contratos = [];
+  state = { checked: ''};
   ngOnInit() {
      this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('pagoId')) {
@@ -31,8 +32,14 @@ export class PagoAddPage implements OnInit {
     });
   }
 
-
-  saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
+  checkbox(e) {
+    e = false;
+    console.log(e);
+  }
+  setState(arg0: { input: any; }) {
+    throw new Error('Method not implemented.');
+  }
+  async saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
     // tslint:disable-next-line:variable-name
               fecha_pago2: HTMLInputElement, agua2,  luz2: HTMLInputElement, gas2: HTMLInputElement,
               expensas2: HTMLInputElement){
@@ -67,6 +74,18 @@ export class PagoAddPage implements OnInit {
   this.pagoService.addPago(val).subscribe(res => {
     alert(res.toString());
   });
-  console.log(val);
+  const alertElement = await this.alertCtrl.create({
+    header: 'Pago registrado',
+    message: 'Tu pago se ha registrado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/pagos', this.id]);
+        }
+      }
+    ]
+  });
+  await alertElement.present();
   }
 }

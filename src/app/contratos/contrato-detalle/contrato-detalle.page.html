@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/contratos">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>{{contrato?.id}}</ion-title>
+    <ion-title>Datos del contrato</ion-title>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="deleteContrato()">
         <ion-icon name="trash"></ion-icon>
@@ -14,28 +14,45 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-        <ion-label>ID</ion-label>
-        <ion-label>Valor</ion-label>
-        <ion-label>Locador</ion-label>
-       </ion-item>
-       </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-       <ion-list>
-         <ion-item>
-          <ion-label>{{contratos?.id}}</ion-label>
-          <ion-label>{{contratos?.valor}}</ion-label>
-          <ion-label>{{locador?.nombre}}</ion-label>
-         </ion-item>
-       </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>ID: </b> {{contratos?.id}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Tipo de contrato: </b> {{contratos?.tipo_contrato}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Valor: </b> {{contratos?.valor}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Honorarios: </b> {{contratos?.honorarios}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Punitorios: </b> {{contratos?.punitorios}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Vencimiento de pago: </b> {{contratos?.vencimiento_pago}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Fecha de ingreso: </b> {{contratos?.fecha_ingreso}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Fecha de egreso: </b> {{contratos?.fecha_egreso}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Fecha de resción: </b> {{contratos?.fecha_rescision}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Propiedad: </b> {{propiedad?.ubicacion}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Locador: </b> {{locador?.nombre}} {{locador?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Inquilino: </b> {{inquilino?.nombre}} {{inquilino?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Garante: </b> {{garante?.nombre}} {{garante?.apellido}}</h1></ion-label>
+    </ion-item>
+  </ion-card>
 </ion-content>

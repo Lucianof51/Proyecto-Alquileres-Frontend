@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocadoresService } from './locadores.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-locadores',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./locadores.page.scss'],
 })
 export class LocadoresPage implements OnInit {
-  constructor(private locadoresService: LocadoresService, private router: Router) { }
+  constructor(private menuCtrl: MenuController, private locadoresService: LocadoresService, private router: Router) { }
   locadores = [];
   ngOnInit() {
     this.locadoresService.getLocadores()
@@ -33,4 +34,7 @@ addNewLocador(){
   verLocador(locadorId){
     this.router.navigate(['/locadores', locadorId]);
     }
+    toggleMenu() {
+      this.menuCtrl.toggle();
+     }
 }

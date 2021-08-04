@@ -30,6 +30,7 @@ export class AlquileresCobradosPage implements OnInit {
   propiedadNombre: any;
   propiedadId: any;
   router: any;
+  m2: any;
   getMes(index){
     const mes = new Array(12);
     mes[0] = 1;
@@ -76,6 +77,22 @@ getDia(index){
       mes[11] = 12;
       return mes[index];
   }
+  function getMes2(index){
+    const mes = new Array(12);
+    mes[0] = 'Enero';
+    mes[1] = 'Febrero';
+    mes[2] = 'Marzo';
+    mes[3] = 'Abril';
+    mes[4] = 'Mayo';
+    mes[5] = 'Junio';
+    mes[6] = 'Julio';
+    mes[7] = 'Agosto';
+    mes[8] = 'Septiembre';
+    mes[9] = 'Octubre';
+    mes[10] = 'Noviembre';
+    mes[11] = 'Diciembre';
+    return mes[index];
+  }
     // this.array.fechas = this.a;
     // tslint:disable-next-line:new-parens
     // this.a = this.array[this.array.fechas];
@@ -84,6 +101,7 @@ getDia(index){
     // this.pruebas = this.array;
     // console.log(this.pruebas);
     const d = new Date();
+    this.m2 = getMes2(d.getMonth());
     this.m = getMes(d.getMonth());
     this.date = d.getDate();
     this.anio = d.getFullYear();

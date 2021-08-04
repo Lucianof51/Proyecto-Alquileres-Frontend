@@ -1,7 +1,8 @@
 {
   "name": "proyecto_alquileres",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

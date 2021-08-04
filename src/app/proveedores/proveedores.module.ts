@@ -13,7 +13,7 @@ import { ProveedoresPage } from './proveedores.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProveedoresPageRoutingModule
+    ProveedoresPageRoutingModule,
   ],
   declarations: [ProveedoresPage]
 })

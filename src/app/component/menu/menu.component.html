@@ -1,18 +1,20 @@
- <ion-menu side="start" menuId="first" contentId="main">
+
+<ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
+      <ion-toolbar color="colortres">
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
+  
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item [routerLink]="['/propiedades']">Propiedades</ion-item>
-          <ion-item [routerLink]="['/locadores']">Locadores</ion-item>
-          <ion-item [routerLink]="['/inquilinos']">Inquilinos</ion-item>
-          <ion-item [routerLink]="['/garantes']">Garantes</ion-item>
-          <ion-item [routerLink]="['/contratos']">Contratos</ion-item>
-          <ion-item [routerLink]="['/proveedores']">Proveedores</ion-item>
+          <ion-item color="color" [routerLink]="['/propiedades']">Propiedades</ion-item>
+          <ion-item color="colordos" [routerLink]="['/locadores']">Locadores</ion-item>
+          <ion-item color="color" [routerLink]="['/inquilinos']">Inquilinos</ion-item>
+          <ion-item color="colordos" [routerLink]="['/garantes']">Garantes</ion-item>
+          <ion-item color="color" [routerLink]="['/contratos']">Contratos</ion-item>
+          <ion-item color="colordos" [routerLink]="['/proveedores']">Proveedores</ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

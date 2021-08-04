@@ -11,7 +11,7 @@ import { InquilinosService } from '../inquilinos.service';
 export class InquilinoUpdatePage implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private activatedRoute: ActivatedRoute, private inquilinoService: InquilinosService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private inquilinoService: InquilinosService, private router: Router,  private alertCtrl: AlertController) { }
   id2: any;
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -26,7 +26,7 @@ export class InquilinoUpdatePage implements OnInit {
 }
 
 // tslint:disable-next-line:max-line-length
-saveInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -56,6 +56,20 @@ saveInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTML
        alert(res.toString());
    });
 
+   const alertElement = await this.alertCtrl.create({
+    header: 'Inquilino actualizado',
+    message: 'El inquilino se ha actualizado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/inquilinos']);
+        }
+      }
+    ]
+   });
+   await alertElement.present();
+       console.log(val);
     console.log(val);
 }
 }

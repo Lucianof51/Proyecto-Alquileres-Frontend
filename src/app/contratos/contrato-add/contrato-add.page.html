@@ -1,12 +1,16 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="colortres">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/contratos">
+      </ion-back-button>
+    </ion-buttons>
     <ion-title>Nuevo contrato</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
+  <ion-card color="dark">
+    <ion-card-content color="dark ">
       <ion-input type="number" placeholder="Valor" #valor2></ion-input>
       <ion-input slot="start" type="number" placeholder="Honorarios" #honorarios2>Honorarios en %</ion-input>
       <ion-input type="number" placeholder="Punitorios" #punitorios2></ion-input>
@@ -15,28 +19,28 @@
       <ion-input type="date" placeholder="Fecha de rescision" #fecha_rescision2>Fecha de rescisión:</ion-input>
       <ion-input type="text" placeholder="Tipo de contrato" #tipo_contrato2></ion-input>
       <ion-input type="date" #vencimiento_pago2>Vencimiento de pago:</ion-input>
-  <ion-item>
+  <ion-item color="dark">
     <ion-label>Propiedad</ion-label>
     <ion-select [(ngModel)]="propiedad.id" #propiedad=ngModel>
       <ion-select-option *ngFor="let propiedad of propiedades" value="{{propiedad.id}}">{{propiedad.ubicacion}}</ion-select-option>
     </ion-select>
   </ion-item>
     
-  <ion-item>
+  <ion-item color="dark">
     <ion-label>Locador</ion-label>
     <ion-select [(ngModel)]="locador.id" #locador=ngModel>
       <ion-select-option *ngFor="let locador of locadores" value="{{locador.id}}">{{locador.nombre}}</ion-select-option>
     </ion-select>
   </ion-item>
   
-  <ion-item>
+  <ion-item color="dark">
     <ion-label>Inquilino</ion-label>
     <ion-select [(ngModel)]="inquilino.id" #inquilino=ngModel>
       <ion-select-option *ngFor="let inquilino of inquilinos" value="{{inquilino.id}}">{{inquilino.nombre}}</ion-select-option>
     </ion-select>
   </ion-item>
 
-<ion-item>
+<ion-item color="dark">
   <ion-label>Garante</ion-label>
   <ion-select [(ngModel)]="garante.id" #garante=ngModel>
     <ion-select-option *ngFor="let garante of garantes" value="{{garante.id}}">{{garante.nombre}}</ion-select-option>

@@ -40,8 +40,9 @@ deletePago(pagoId){
     return this.http.get(this.APIurl + '/pago/' + pagoId, { headers: this.httpHeaders });
   }
 
-updatePago(){
-
+updatePago(val: any){
+  console.log(val);
+  return this.http.put(this.APIurl + '/pago', + val.id, val);
 }
 
 guardarDatos(){

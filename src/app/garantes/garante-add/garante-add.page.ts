@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GarantesService } from '../garantes.service';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-garante-add',
   templateUrl: './garante-add.page.html',
@@ -9,13 +9,13 @@ import { GarantesService } from '../garantes.service';
 })
 export class GaranteAddPage implements OnInit {
 
-  constructor(private garanteService: GarantesService, private router: Router) { }
+  constructor(private garanteService: GarantesService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
 
   // tslint:disable-next-line:max-line-length
-saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -40,7 +40,18 @@ saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTM
     this.garanteService.addGarante(val).subscribe(res => {
        alert(res.toString());
    });
-
-    console.log(val);
+   const alertElement = await this.alertCtrl.create({
+    header: 'Garante registrado',
+    message: 'El garante se ha registrado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/garantes']);
+        }
+      }
+    ]
+  });
+  await alertElement.present();
 }
 }

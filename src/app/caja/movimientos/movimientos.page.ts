@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Contrato } from 'src/app/contratos/contrato.model';
 import { ContratosService } from 'src/app/contratos/contratos.service';
 import { PagosService } from 'src/app/pagos/pagos.service';
+import { PropiedadesService } from 'src/app/propiedades/propiedades.service';
+import { ReporteService } from 'src/app/reportes/reporte.service';
 
 @Component({
   selector: 'app-movimientos',
@@ -9,17 +12,61 @@ import { PagosService } from 'src/app/pagos/pagos.service';
   styleUrls: ['./movimientos.page.scss'],
 })
 export class MovimientosPage implements OnInit {
+  movimientos = [];
   pagos = [];
   contratoId: any;
   contratos: Contrato[];
-  constructor(private pagoService: PagosService, private contratoService: ContratosService) { }
+  reportes = [];
+  reporteId: any;
+  propiedadId: any;
+  movimientos2 = []
+  constructor(private pagoService: PagosService, private reporteService: ReporteService,
+              private propiedadService: PropiedadesService, private contratoService: ContratosService, private router: Router) { }
 
   ngOnInit() {
+
+    this.reporteService.getReportes()
+    .subscribe(reporte => {
+      this.reportes = reporte;
+      this.movimientos = this.reportes.map(reporte => {
+       return {
+         id: reporte.id,
+         fechaPago: reporte.fecha,
+         costo: reporte.costo
+       }     
+      });
+       
+    
+
     this.pagoService.getPagos()
-    .subscribe(data => {
-      this.pagos = data;
-      console.log(this.pagos);
+    .subscribe(pago => {
+      this.pagos = pago;
+      this.movimientos2 = this.pagos.map(pago => {
+        return {
+          id2: pago.id,
+          fechaPago: pago.fecha_pago,
+          monto: pago.monto,
+          contrato: pago.contrato
+        }
+      });
+    console.log(this.movimientos);
+    console.log(this.movimientos2);
+    this.movimientos = this.movimientos.concat(this.movimientos2);
+    this.movimientos = this.movimientos.sort(function(a,b){
+    return  new Date(a.fechaPago).getTime() - new Date(b.fechaPago).getTime();
     });
+    console.log(this.movimientos);
+    });
+  });
   }
 
+  mostrarPago(pagoId, contrato){
+    console.log(pagoId);
+    this.router.navigate(['pagos', contrato, pagoId]);
+  }
+
+  mostrarReporte(reporteId)
+  {
+    this.router.navigate(['/reportes', reporteId]);
+  }
 }

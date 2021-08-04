@@ -49,4 +49,7 @@ export class PropiedadDetallePage implements OnInit {
   });
   await alertElement.present();
 }
+gotoAlquileres() {
+  this.router.navigate(['/contratos']);
+}
 }

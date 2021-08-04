@@ -5,6 +5,10 @@ import { ContratosService } from '../contratos.service';
 import {Contrato} from '../contrato.model';
 import { LocadoresService } from 'src/app/locadores/locadores.service';
 import { Persona } from 'src/app/persona.model';
+import { PropiedadesService } from 'src/app/propiedades/propiedades.service';
+import { InquilinosService } from 'src/app/inquilinos/inquilinos.service';
+import { GarantesService } from 'src/app/garantes/garantes.service';
+import { Propiedad } from 'src/app/propiedades/propiedad.model';
 @Component({
   selector: 'app-contrato-detalle',
   templateUrl: './contrato-detalle.page.html',
@@ -14,8 +18,11 @@ export class ContratoDetallePage implements OnInit {
   contratos: Contrato;
   locador: Persona;
   locadorId: any;
+  inquilino: Persona;
+  garante: Persona;
+  propiedad: Propiedad;
   // tslint:disable-next-line:max-line-length
-  constructor(private locadorService: LocadoresService, private activatedRoute: ActivatedRoute, private contratoService: ContratosService, private router: Router, private alertCtrl: AlertController) { }
+  constructor(private propiedadService: PropiedadesService, private inquilinoService: InquilinosService, private garanteService: GarantesService, private locadorService: LocadoresService, private activatedRoute: ActivatedRoute, private contratoService: ContratosService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -29,6 +36,7 @@ export class ContratoDetallePage implements OnInit {
       this.contratos = data;
       this.locadorId = this.contratos.locador;
       console.log(this.contratos);
+      console.log(this.locadorId);
     });
     });
   }
@@ -36,10 +44,20 @@ export class ContratoDetallePage implements OnInit {
   ionViewDidEnter() {
     this.locadorService.getLocador(this.contratos.locador)
     .subscribe(data => {
-      console.log(this.locadorId);
       this.locador = data;
     });
-    console.log(this.locador.nombre);
+    this.propiedadService.getPropiedad(this.contratos.propiedad)
+    .subscribe(data => {
+      this.propiedad = data;
+    });
+    this.inquilinoService.getInquilino(this.contratos.inquilino)
+    .subscribe(data => {
+      this.inquilino = data;
+    });
+    this.garanteService.getGarante(this.contratos.garante)
+    .subscribe(data => {
+      this.garante = data;
+    });
   }
   async deleteContrato(){
   const alertElement = await this.alertCtrl.create({

@@ -8,6 +8,17 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content padding>
+  <div padding>
+    <ion-label color="primary" stacked>Asunto</ion-label>
+    <ion-input [(ngModel)]="subject" type="text"></ion-input>
+    <ion-textarea [(ngModel)]="body" placeholder="Contenido"></ion-textarea>
+    <ion-label color="primary" stacked>Para</ion-label>
+    <ion-input [(ngModel)]="to" type="text"></ion-input>
+    <button ion-button block (click)="Enviar()">Enviar</button>
+  </div>
+</ion-content>
+<!--
 <ion-content>
   <ion-item>
     <ion-label>Locador</ion-label>
@@ -33,3 +44,4 @@
 </ion-card-content>
 </ion-card>
 </ion-content>
+-->

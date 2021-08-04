@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/garantes">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>{{garante?.nombre}}</ion-title>
+    <ion-title>{{garante?.nombre}} {{garante?.apellido}}</ion-title>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="deleteGarante()">
         <ion-icon name="trash"></ion-icon>
@@ -14,15 +14,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <h3>Nombre: {{garante?.nombre}}</h3>
-    </ion-col>
-  </ion-row>
-    <h3>Apellido: {{garante?.apellido}}</h3>
-  <ion-row>
-      <h3>DNI: {{garante?.DNI}}</h3>
-  </ion-row>
-</ion-grid>
+  <ion-card>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Nombre: </b> {{garante?.nombre}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Apellido: </b> {{garante?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>DNI: </b> {{garante?.DNI}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>CUIT: </b> {{garante?.CUIT}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Direccion: </b> {{garante?.direccion}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Telefono: </b> {{garante?.telefono}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Email: </b> {{garante?.email}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Cuenta bancaria: </b> {{garante?.cuenta_bancaria}}</h1></ion-label>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GarantesService } from './garantes.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-garantes',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class GarantesPage implements OnInit {
 
-  constructor(private garantesService: GarantesService, private router: Router) { }
+  constructor(private menuCtrl: MenuController, private garantesService: GarantesService, private router: Router) { }
   garantes = [];
   ngOnInit() {
     this.garantesService.getGarantes()
@@ -33,4 +34,7 @@ export class GarantesPage implements OnInit {
   verGarantes(garanteId){
     this.router.navigate(['/garantes', garanteId]);
   }
+  toggleMenu() {
+    this.menuCtrl.toggle();
+   }
 }

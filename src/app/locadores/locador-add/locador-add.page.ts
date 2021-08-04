@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocadoresService } from '../locadores.service';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-locador-add',
   templateUrl: './locador-add.page.html',
@@ -9,13 +9,13 @@ import { LocadoresService } from '../locadores.service';
 })
 export class LocadorAddPage implements OnInit {
 
-  constructor(private locadorService: LocadoresService, private router: Router) { }
+  constructor(private locadorService: LocadoresService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
 
 // tslint:disable-next-line:max-line-length
-saveNewLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveNewLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -40,7 +40,18 @@ saveNewLocador(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTM
     this.locadorService.addLocadores(val).subscribe(res => {
        alert(res.toString());
    });
-
-    console.log(val);
+   const alertElement = await this.alertCtrl.create({
+    header: 'Locador se ha registrado',
+    message: 'El locador se ha registrado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/locadores']);
+        }
+      }
+    ]
+  });
+  await alertElement.present();
 }
 }

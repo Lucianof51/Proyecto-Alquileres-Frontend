@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/proveedores">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>{{proveedor?.nombre}}</ion-title>
+    <ion-title>{{proveedor?.nombre}} {{proveedor?.apellido}}</ion-title>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="deleteProveedor()">
         <ion-icon name="trash"></ion-icon>
@@ -14,16 +14,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <h3>Nombre: {{proveedor?.nombre}}</h3>
-    </ion-col>
-  </ion-row>
-    <h3>Apellido: {{proveedor?.apellido}}</h3>
-  <ion-row>
-      <h3>DNI: {{proveedor?.DNI}}</h3>
-  </ion-row>
-</ion-grid>
+  <ion-card>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Nombre: </b> {{proveedor?.nombre}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Apellido: </b> {{proveedor?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>DNI: </b> {{proveedor?.DNI}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>CUIT: </b> {{proveedor?.CUIT}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Direccion: </b> {{proveedor?.direccion}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Telefono: </b> {{proveedor?.telefono}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Email: </b> {{proveedor?.email}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Cuenta bancaria: </b> {{proveedor?.cuenta_bancaria}}</h1></ion-label>
+    </ion-item>
+  </ion-card>
 </ion-content>
 

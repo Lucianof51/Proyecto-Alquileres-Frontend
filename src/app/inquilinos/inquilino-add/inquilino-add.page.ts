@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InquilinosService } from '../inquilinos.service';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-inquilino-add',
   templateUrl: './inquilino-add.page.html',
@@ -8,13 +10,13 @@ import { InquilinosService } from '../inquilinos.service';
 })
 export class InquilinoAddPage implements OnInit {
 
-  constructor(private inquilinoService: InquilinosService, private router: Router) { }
+  constructor(private inquilinoService: InquilinosService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
 
   // tslint:disable-next-line:max-line-length
-saveNewInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveNewInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -39,7 +41,19 @@ saveNewInquilino(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: H
     this.inquilinoService.addInquilinos(val).subscribe(res => {
        alert(res.toString());
    });
-
-    console.log(val);
+   const alertElement = await this.alertCtrl.create({
+    header: 'Inquilino registrado',
+    message: 'El inquilino se ha registrado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/inquilinos']);
+        }
+      }
+    ]
+  });
+  await alertElement.present();
 }
+
 }

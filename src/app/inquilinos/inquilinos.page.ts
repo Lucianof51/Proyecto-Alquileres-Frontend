@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InquilinosService } from './inquilinos.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-inquilinos',
   templateUrl: './inquilinos.page.html',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class InquilinosPage implements OnInit {
 
-  constructor(private inquilinosService: InquilinosService, private router: Router) { }
+  constructor(private menuCtrl: MenuController, private inquilinosService: InquilinosService, private router: Router) { }
   inquilinos = [];
   ngOnInit() {
     this.inquilinosService.getInquilinos()
@@ -33,4 +34,8 @@ export class InquilinosPage implements OnInit {
   verInquilino(inquilinoId){
     this.router.navigate(['/inquilinos', inquilinoId]);
     }
+
+    toggleMenu() {
+      this.menuCtrl.toggle();
+     }
 }

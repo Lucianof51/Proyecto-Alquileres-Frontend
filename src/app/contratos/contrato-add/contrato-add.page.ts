@@ -4,8 +4,8 @@ import { LocadoresService } from 'src/app/locadores/locadores.service';
 import { GarantesService } from '../../garantes/garantes.service';
 import {PropiedadesService} from '../../propiedades/propiedades.service';
 import {ContratosService} from '../contratos.service';
-import { Persona } from 'src/app/persona.model';
-
+import { AlertController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-contrato-add',
   templateUrl: './contrato-add.page.html',
@@ -15,7 +15,8 @@ export class ContratoAddPage implements OnInit {
 
   constructor(private garantesService: GarantesService, private propiedadesService: PropiedadesService,
               private locadoresService: LocadoresService, private contratoService: ContratosService,
-              private inquilinosService: InquilinosService) { }
+              private inquilinosService: InquilinosService,
+              private activatedRoute: ActivatedRoute, private router: Router, private alertCtrl: AlertController) { }
   propiedades = [];
   garantes = [];
   locadores = [];
@@ -47,7 +48,7 @@ export class ContratoAddPage implements OnInit {
     });
   }
   // tslint:disable-next-line:variable-name
-  saveNewContrato(valor2, honorarios2, punitorios2: HTMLInputElement,
+  async saveNewContrato(valor2, honorarios2, punitorios2: HTMLInputElement,
                   // tslint:disable-next-line:variable-name
                   fecha_ingreso2: HTMLInputElement, fecha_egreso2: HTMLInputElement, fecha_rescision2: HTMLInputElement,
                   // tslint:disable-next-line:variable-name
@@ -86,9 +87,34 @@ export class ContratoAddPage implements OnInit {
                     locador,
                     inquilino,
                     garante };
+
                   this.contratoService.addContrato(val).subscribe(res => {
                     alert(res.toString());
                 });
-                  console.log(val);
+                this.propiedadesService.getPropiedad(propiedad2.value).subscribe(data=>{
+                  const id = propiedad2.value;
+                  const val = {
+                    id,
+                    ubicacion: data.ubicacion,
+                    estado: 'En alquiler',
+                    tipo: data.tipo
+                  }
+                  this.propiedadesService.updatePropiedad(val).subscribe(res => {
+                    alert(res.toString());
+                });
+                });
+                const alertElement = await this.alertCtrl.create({
+                  header: 'Contrato creado',
+                  message: 'Tu contrato se ha generado con exito',
+                  buttons: [
+                    {
+                      text: 'OK',
+                      handler: () => {
+                        this.router.navigate(['/contratos']);
+                      }
+                    }
+                  ]
+                });
+                await alertElement.present();
                 }
 }

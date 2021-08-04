@@ -178,6 +178,20 @@ const routes: Routes = [
   },
 
   {
+    path: 'pago-update',
+    children: [
+      {
+        path: ':contratoId',
+        children: [
+          {
+          path: ':pagoId',
+          loadChildren: () => import('./pagos/pago-update/pago-update.module').then(m => m.PagoUpdatePageModule)
+          },
+        ]
+    },
+    ],
+  },
+  {
     path: 'locador-detalle',
     loadChildren: () => import('./locadores/locador-detalle/locador-detalle.module').then( m => m.LocadorDetallePageModule)
   },
@@ -254,10 +268,6 @@ const routes: Routes = [
         loadChildren: () => import('./pagos/pago-add/pago-add.module').then(m => m.PagoAddPageModule)
     },
     ]
-  },
-  {
-    path: 'pago-detalle',
-    loadChildren: () => import('./pagos/pago-detalle/pago-detalle.module').then(m => m.PagoDetallePageModule)
   },
 
   {

@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inquilinos">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>{{inquilino?.nombre}}</ion-title>
+    <ion-title>{{inquilino?.nombre}} {{inquilino?.apellido}}</ion-title>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="deleteInquilino()">
         <ion-icon name="trash"></ion-icon>
@@ -14,15 +14,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <h3>Nombre: {{inquilino?.nombre}}</h3>
-    </ion-col>
-  </ion-row>
-    <h3>Apellido: {{inquilino?.apellido}}</h3>
-  <ion-row>
-      <h3>DNI: {{inquilino?.DNI}}</h3>
-  </ion-row>
-</ion-grid>
+  <ion-card>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Nombre: </b> {{inquilino?.nombre}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Apellido: </b> {{inquilino?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>DNI: </b> {{inquilino?.DNI}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>CUIT: </b> {{inquilino?.CUIT}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Direccion: </b> {{inquilino?.direccion}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Telefono: </b> {{inquilino?.telefono}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Email: </b> {{inquilino?.email}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Cuenta bancaria: </b> {{inquilino?.cuenta_bancaria}}</h1></ion-label>
+    </ion-item>
+  </ion-card>
 </ion-content>

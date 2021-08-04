@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="colortres">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/locadores">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>{{locador?.nombre}}</ion-title>
+    <ion-title>{{locador?.nombre}} {{locador?.apellido}}</ion-title>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="deleteLocador()">
         <ion-icon name="trash"></ion-icon>
@@ -14,15 +14,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <h3>Nombre: {{locador?.nombre}}</h3>
-    </ion-col>
-  </ion-row>
-    <h3>Apellido: {{locador?.apellido}}</h3>
-  <ion-row>
-      <h3>DNI: {{locador?.DNI}}</h3>
-  </ion-row>
-</ion-grid>
+  <ion-card>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Nombre: </b> {{locador?.nombre}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Apellido: </b> {{locador?.apellido}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>DNI: </b> {{locador?.DNI}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>CUIT: </b> {{locador?.CUIT}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Direccion: </b> {{locador?.direccion}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Telefono: </b> {{locador?.telefono}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="color">
+      <ion-label color="dark"><h1><b>Email: </b> {{locador?.email}}</h1></ion-label>
+    </ion-item>
+    <ion-item color="colordos">
+      <ion-label color="dark"><h1><b>Cuenta bancaria: </b> {{locador?.cuenta_bancaria}}</h1></ion-label>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -10,6 +10,10 @@ import { Contrato } from '../contratos/contrato.model';
 })
 export class PropiedadesService {
   propiedad: Propiedad[];
+  propiedad2: {
+    id: number,
+    estado: string
+  }
   readonly APIurl = 'http://127.0.0.1:8000';
   constructor(private http: HttpClient, private contratoService: ContratosService) { }
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
@@ -50,4 +54,14 @@ public getPropiedadId(id: number): Propiedad {
   return this.guardarDatos().find(item => { return item.id === id;
   });
 }
+
+doRefresh(event) {
+  console.log('Begin async operation');
+
+  setTimeout(() => {
+    console.log('Async operation has ended');
+    event.target.complete();
+  }, 2000);
+}
+
 }

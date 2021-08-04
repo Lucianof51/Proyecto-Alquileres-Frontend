@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -10,9 +10,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './component/menu/menu.component';
-
+import { Crop } from '@ionic-native/crop/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 @NgModule({
   declarations: [AppComponent, MenuComponent],
   entryComponents: [],
@@ -22,7 +24,11 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ImagePicker
+    ImagePicker,
+    EmailComposer,
+    File,
+    FileTransfer,
+    Crop
   ],
   bootstrap: [AppComponent]
 })

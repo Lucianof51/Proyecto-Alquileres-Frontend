@@ -1,6 +1,6 @@
 
 export interface Propiedad {
-    id: number;
+    id: any;
     ubicacion: string;
     estado: string;
     tipo: string;

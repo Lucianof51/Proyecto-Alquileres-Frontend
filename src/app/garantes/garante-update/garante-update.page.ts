@@ -27,7 +27,7 @@ export class GaranteUpdatePage implements OnInit {
 }
 
 // tslint:disable-next-line:max-line-length
-saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -56,7 +56,19 @@ saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTM
     this.garanteService.updateGarantes(val).subscribe(res => {
        alert(res.toString());
    });
-
+const alertElement = await this.alertCtrl.create({
+ header: 'Garante actualizado',
+ message: 'El garante se ha actualizado con exito',
+ buttons: [
+   {
+     text: 'OK',
+     handler: () => {
+       this.router.navigate(['/garantes']);
+     }
+   }
+ ]
+});
+await alertElement.present();
     console.log(val);
 }
 }

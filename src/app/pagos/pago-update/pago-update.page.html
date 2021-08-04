@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>pago-update</ion-title>
+      <ion-toolbar color="colortres">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/pagos">
+          </ion-back-button>
+        </ion-buttons>
+    <ion-title>Actualizar pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card color="dark">
+    <ion-card-content>
+      <ion-input type="number" placeholder="Monto" #monto2></ion-input>
+      <ion-input slot="start" type="number" placeholder="Honorarios" #honorarios2>Honorarios en %</ion-input>
+      <ion-input type="number" placeholder="Punitorios" #punitorios2></ion-input>
+      <ion-input type="date" #fecha_pago2>Fecha de pago:</ion-input>
+      <ion-item color="colorcuatro">
+        <ion-label>¿Pago de agua?</ion-label>
+        <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check4></ion-checkbox>
+      </ion-item>
+      <ion-input type="number" placeholder="Ingrese valor del agua" #agua2 disabled="{{!check4}}"></ion-input>
+      <ion-item color="colorcuatro">
+        <ion-label>¿Pago de luz?</ion-label>
+        <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check></ion-checkbox>
+      </ion-item>
+      <ion-input type="number" placeholder="Ingrese valor de la luz" #luz2 disabled="{{!check}}"></ion-input>
+      <ion-item color="colorcuatro">
+        <ion-label>¿Pago de gas?</ion-label>
+        <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check2></ion-checkbox>
+      </ion-item>        
+      <ion-input type="number" placeholder="Ingrese valor del gas" #gas2 disabled="{{!check2}}"></ion-input>
+      <ion-item color="colorcuatro">
+        <ion-label>¿Pago de expensas?</ion-label>
+        <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check3></ion-checkbox>
+      </ion-item>        
+      <ion-input type="number" placeholder="Ingrese valor de las expensas" #expensas2 disabled="{{!check3}}"></ion-input>
+      <br>
+<ion-button color="primary" (click)="saveNewPago(monto2, honorarios2, punitorios2, fecha_pago2, agua2, luz2, gas2, expensas2)">SAVE</ion-button>
+</ion-card-content>
+</ion-card>
 </ion-content>

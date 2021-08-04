@@ -11,6 +11,7 @@ import { PropiedadesService } from 'src/app/propiedades/propiedades.service';
 })
 export class AlquileresPendientesPage implements OnInit {
 m: any;
+m2: any;
 date: any;
 anio: any;
 pagos: Pago[];
@@ -35,7 +36,24 @@ propiedadId: any;
       mes[11] = 12;
       return mes[index];
     }
+    function getMes2(index){
+      const mes = new Array(12);
+      mes[0] = 'Enero';
+      mes[1] = 'Febrero';
+      mes[2] = 'Marzo';
+      mes[3] = 'Abril';
+      mes[4] = 'Mayo';
+      mes[5] = 'Junio';
+      mes[6] = 'Julio';
+      mes[7] = 'Agosto';
+      mes[8] = 'Septiembre';
+      mes[9] = 'Octubre';
+      mes[10] = 'Noviembre';
+      mes[11] = 'Diciembre';
+      return mes[index];
+    }
     const d = new Date();
+    this.m2 = getMes2(d.getMonth());
     this.m = getMes(d.getMonth());
     console.log(this.m);
     this.date = d.getDate();
@@ -57,10 +75,10 @@ propiedadId: any;
   }
 
   ionViewDidEnter(){
-        // FILTRO Y MAPEO DE TODOS LOS PAGOS PENDIENTEES EN EL MES CORRIENTE
+        // FILTRO Y MAPEO DE TODOS LOS PAGOS PENDIENTES EN EL MES CORRIENTE
         this.pagoService.getPagos() 
         .subscribe(data => {
-          this.pagos = data.filter(data => new Date(data.fecha_pago).getMonth()+1 === this.m-1 && new Date(data.fecha_pago).getFullYear() === this.anio);
+          this.pagos = data.filter(data => new Date(data.fecha_pago).getMonth()+1 < this.m && new Date(data.fecha_pago).getFullYear() === this.anio);
           this.pagos = this.pagos.map(pago => {
             return {
               id: pago.id,
@@ -81,6 +99,11 @@ propiedadId: any;
             };
             });
           console.log(this.pagos);
+          this.pagos = this.pagos.sort(function(a,b){
+            return new Date(b.fecha_pago).getTime() - new Date(a.fecha_pago).getTime();
+          });
         });
+        
     }
+    
 }

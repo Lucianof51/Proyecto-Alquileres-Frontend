@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { ProveedoresService } from '../proveedores.service';
 @Component({
   selector: 'app-proveedor-add',
@@ -8,13 +9,13 @@ import { ProveedoresService } from '../proveedores.service';
 })
 export class ProveedorAddPage implements OnInit {
 
-  constructor(private proveedorService: ProveedoresService, private router: Router) { }
+  constructor(private proveedorService: ProveedoresService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
 
   // tslint:disable-next-line:max-line-length
-saveNewProveedor(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
+  async saveNewProveedor(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
   // tslint:disable-next-line:align
   email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
     const nombre = nombre2.value;
@@ -39,7 +40,18 @@ saveNewProveedor(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: H
     this.proveedorService.addProveedor(val).subscribe(res => {
        alert(res.toString());
    });
-
-    console.log(val);
+   const alertElement = await this.alertCtrl.create({
+    header: 'Proveedor registrado',
+    message: 'El proveedor se ha registrado con exito',
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/proveedores']);
+        }
+      }
+    ]
+  });
+  await alertElement.present();
 }
 }
