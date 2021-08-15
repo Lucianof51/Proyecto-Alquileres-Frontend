@@ -102,7 +102,6 @@ export class ContratoAddPage implements OnInit {
       { type: 'pattern', message: 'Ingrese un valor valido' }
     ],
     punitorios: [
-      {type: 'required', message: 'Punitorios requerido'},
       { type: 'pattern', message: 'Ingrese un valor valido' }
     ],
     fecha_ingreso: [
@@ -143,7 +142,6 @@ export class ContratoAddPage implements OnInit {
     ]],
     punitorios: ['', 
     [
-      Validators.required,
       Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
     ]],
     fecha_ingreso: ['', [Validators.required]],
@@ -161,22 +159,43 @@ export class ContratoAddPage implements OnInit {
   });
 
   public async submit() {
-    this.contratoService.addContrato(this.registrationForm.value).subscribe(res => {
+    this.propiedadesService.getPropiedad(this.registrationForm.value.propiedad).subscribe(data => {
+      data.estado = 'En alquiler';  
+      this.propiedadesService.updatePropiedad(data).subscribe(res => {
+        alert(res.toString());
+      });
+    });
+    this.contratoService.addContrato(this.registrationForm.value).subscribe(async res => {
       alert(res.toString());
-  });
+      const alertElement = await this.alertCtrl.create({
+        header: 'Contrato creado',
+        message: 'Tu contrato se ha generado con exito',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.router.navigate(['/contratos']);
+            }
+          }
+        ]
+      });
+      await alertElement.present();
+  },
+  async err => {
     const alertElement = await this.alertCtrl.create({
-      header: 'Contrato creado',
-      message: 'Tu contrato se ha generado con exito',
+      header: 'Error al crear contrato',
+      message: 'No ha ingresado los datos correctos',
       buttons: [
         {
           text: 'OK',
-          handler: () => {
-            this.router.navigate(['/contratos']);
-          }
         }
       ]
     });
     await alertElement.present();
+  }
+  );
+  
+  
   }
   
 }

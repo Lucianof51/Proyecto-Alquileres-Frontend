@@ -64,5 +64,10 @@ export class ContratosService {
     return this.contrato.filter( item => item.id === contrato);
   }
 
+  public getContratoPropiedad(id: number): Contrato {
+    this.contratos = this.guardarDatos2();
+    return this.guardarDatos2().find(item => { return item.propiedad === id;
+});
+  }
 
 }

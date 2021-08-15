@@ -44,14 +44,11 @@
     <ion-item color="colordos">
       <ion-label color="dark"><h1><b>Fecha de egreso: </b> {{contratos?.fecha_egreso}}</h1></ion-label>
     </ion-item>
-    <ion-item color="color">
-      <ion-label color="dark"><h1><b>Fecha de resción: </b> {{contratos?.fecha_rescision}}</h1></ion-label>
-    </ion-item>
     <ion-item color="color" *ngIf="contratos?.fecha_rescision != null">
-      <ion-label color="dark"><h1><b>Fecha de resción: </b> {{contratos?.fecha_rescision}}</h1></ion-label>
+      <ion-label color="dark"><h1><b>Fecha de rescisión: </b> {{contratos?.fecha_rescision}}</h1></ion-label>
     </ion-item>
     <ion-item color="color" *ngIf="contratos?.fecha_rescision == null">
-      <ion-label color="dark" text-wrap><h1><b>Fecha de resción: </b>No se ha registrado fecha</h1></ion-label>
+      <ion-label color="dark" text-wrap><h1><b>Fecha de rescisión: </b>No se ha registrado fecha</h1></ion-label>
     </ion-item>
     <ion-item color="colordos">
       <ion-label color="dark"><h1><b>Propiedad: </b> {{propiedad?.ubicacion}}</h1></ion-label>

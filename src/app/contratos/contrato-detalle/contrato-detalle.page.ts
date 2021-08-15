@@ -64,7 +64,6 @@ export class ContratoDetallePage implements OnInit {
   async deleteContrato(){
   const alertElement = await this.alertCtrl.create({
     header: 'Estas seguro de querer eliminar',
-    message: 'Se cuidadoso',
     buttons: [
       {
        text: 'Cancel',
@@ -73,6 +72,12 @@ export class ContratoDetallePage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
+          this.propiedadService.getPropiedad(this.contratos.propiedad).subscribe(data => {
+            data.estado = 'Disponible';  
+            this.propiedadService.updatePropiedad(data).subscribe(res => {
+              alert(res.toString());
+            });
+          });
           this.contratoService.deleteContrato(this.contratos.id);
           this.router.navigate(['/contratos']);
         }
