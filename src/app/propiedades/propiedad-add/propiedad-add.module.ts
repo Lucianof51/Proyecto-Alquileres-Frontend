@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PropiedadAddPageRoutingModule } from './propiedad-add-routing.module';
-
+import { ReactiveFormsModule } from '@angular/forms'
 import { PropiedadAddPage } from './propiedad-add.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { PropiedadAddPage } from './propiedad-add.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PropiedadAddPageRoutingModule
+    PropiedadAddPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [PropiedadAddPage]
 })

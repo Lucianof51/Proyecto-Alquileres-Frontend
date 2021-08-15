@@ -8,7 +8,9 @@ import { Persona } from '../persona.model';
 })
 export class ProveedoresService {
   readonly APIurl = 'http://127.0.0.1:8000';
+  proveedor: Persona;
   items: any[] = [];
+  my_notes_offline = [];
   constructor(private http: HttpClient) { }
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   getProveedores(): Observable<any> {
@@ -17,7 +19,15 @@ export class ProveedoresService {
   
   addProveedor(val: any) {
     console.log(val);
+    this.proveedor = val;
+    this.my_notes_offline.push({
+      id: val.id,
+      proveedor: val,
+      action: 'create'
+    });
     return this.http.post(this.APIurl + '/proveedor', val);
+   
+
   }
 
   getProveedor(proveedorId): Observable<any> {
@@ -34,6 +44,5 @@ export class ProveedoresService {
   updateProveedor(proveedor: Persona): Observable<any> {
     return this.http.put(this.APIurl + '/proveedor/' + proveedor.id, proveedor);
   }
-
 }
 

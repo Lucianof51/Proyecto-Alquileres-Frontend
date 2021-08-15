@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-
+import { HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,7 +11,8 @@ export class HomePage implements OnInit {
 
   constructor(private router: Router,
     // tslint:disable-next-line:align
-    private menuCtrl: MenuController) {}
+    private menuCtrl: MenuController, private http: HttpClient) {}
+    
 
  ngOnInit(){
   function getDia(index){
@@ -50,6 +51,19 @@ reportes(){
 avisos(){
   this.router.navigate(['/avisos']);
 }
-
+newCliente(nombre2: HTMLInputElement, edad2: HTMLInputElement){
+    const Nombre = nombre2.value;
+    const Edad = edad2.value;
+    // tslint:disable-next-line:variable-name
+    const val = {
+      Nombre,
+      Edad,
+    };
+    console.log(val)
+    this.http.post('http://127.0.0.1:8000/registro/', val).subscribe(
+  data => console.log(data),
+  error => console.log(error)
+);
+}
 }
 

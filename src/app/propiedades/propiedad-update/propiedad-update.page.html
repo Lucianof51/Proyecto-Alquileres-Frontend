@@ -10,15 +10,48 @@
 </ion-header>
 
 <ion-content>
-<ion-row>
   <ion-card color="dark">
-    <ion-card-content>
-      <ion-input type="text" placeholder="Ubicación" #ubicacion2></ion-input>
-      <ion-input type="text" placeholder="Estado" #estado2></ion-input>
-      <ion-input type="text" placeholder="Tipo de propiedad" #tipo2></ion-input>
-      <ion-button color="primary" (click)="savePropiedad(ubicacion2, estado2, tipo2)">
-      SAVE</ion-button>
-     </ion-card-content>
-  </ion-card>
-</ion-row>
+  <div>
+    <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+      <ion-list>
+        <ion-item color="dark">
+          <ion-label position="floating">Ubicación</ion-label>
+          <ion-input autocapitalize inputmode="text" formControlName="ubicacion"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.ubicacion">
+          <ng-container *ngIf="ubicacion.hasError(error.type) && (ubicacion.dirty || ubicacion.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item color="dark">
+          <ion-label>Estado</ion-label>
+          <ion-select inputmode="tel" formControlName="estado">
+            <ion-select-option value="Disponible">Disponible</ion-select-option>
+            <ion-select-option value="En alquiler">En alquiler</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.estado">
+          <ng-container *ngIf="estado.hasError(error.type) && (estado.dirty || estado.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item color="dark">
+          <ion-label position="floating">Tipo de propiedad</ion-label>
+          <ion-input inputmode="tipo" formControlName="tipo"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.tipo">
+          <ng-container *ngIf="tipo.hasError(error.type) && (tipo.dirty || tipo.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </ion-list>
+
+     
+      <ion-button [disabled]="!registrationForm.valid" type="submit" expand="block">ACTUALIZAR <ion-icon slot="end"
+          name="create">
+        </ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-card>
 </ion-content>

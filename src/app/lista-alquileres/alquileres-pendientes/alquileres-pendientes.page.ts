@@ -62,13 +62,11 @@ propiedadId: any;
     .subscribe(data => {
       this.pagos = data;
       this.propiedadNombre = this.propiedadService.getPropiedadId(data.propiedad).ubicacion
-     // this.propiedadId = this.contratoService.getContratoId(data.contrato).propiedad;
      
   });
   this.pagoService.getPagos()
   .subscribe(data => {
     this.pagos = data;
-   // this.propiedadNombre = this.propiedadesService.getPropiedadId(data.propiedad).ubicacion
     this.propiedadId = this.contratosService.getContratoId(data.contrato).propiedad;
    
 });

@@ -35,8 +35,22 @@
         <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check3></ion-checkbox>
       </ion-item>        
       <ion-input type="number" placeholder="Ingrese valor de las expensas" #expensas2 disabled="{{!check3}}"></ion-input>
+      <ion-item color="colorcuatro">
+        <ion-label>¿Otras tasas?</ion-label>
+        <ion-checkbox color="dark" checked slot="start" [(ngModel)]=check5></ion-checkbox>
+      </ion-item>
+      <ion-input type="text" placeholder="Ingrese descripcion de tasas 1" #tasas1desc disabled="{{!check5}}"></ion-input> 
+      <ion-input type="number" placeholder="Ingrese valor tasas 1" #tasas1 disabled="{{!check5}}"></ion-input>
       <br>
-<ion-button color="primary" (click)="saveNewPago(monto2, honorarios2, punitorios2, fecha_pago2, agua2, luz2, gas2, expensas2)">AGREGAR PAGO</ion-button>
+      <ion-input type="text" placeholder="Ingrese descripcion de tasas 2" #tasas2desc disabled="{{!check5}}"></ion-input> 
+      <ion-input type="number" placeholder="Ingrese valor tasas 2" #tasas2 disabled="{{!check5}}"></ion-input>
+      <br>
+      <ion-input type="text" placeholder="Ingrese descripcion de tasas 3" #tasas3desc disabled="{{!check5}}"></ion-input> 
+      <ion-input type="number" placeholder="Ingrese valor tasas 3" #tasas3 disabled="{{!check5}}"></ion-input>
+      <ion-input type="text" placeholder="Ingrese descripcion de tasas 4" #tasas4desc disabled="{{!check5}}"></ion-input> 
+      <ion-input type="number" placeholder="Ingrese valor tasas 4" #tasas4 disabled="{{!check5}}"></ion-input>
+      <br>
+<ion-button color="primary" (click)="saveNewPago(monto2, honorarios2, punitorios2, fecha_pago2, agua2, luz2, gas2, expensas2, tasas1desc, tasas1, tasas2desc, tasas2, tasas3desc, tasas3, tasas4desc, tasas4)">AGREGAR PAGO</ion-button>
 </ion-card-content>
 </ion-card>
 </ion-content>

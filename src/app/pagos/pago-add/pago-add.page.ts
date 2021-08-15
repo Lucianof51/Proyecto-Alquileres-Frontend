@@ -42,23 +42,86 @@ export class PagoAddPage implements OnInit {
   async saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
     // tslint:disable-next-line:variable-name
               fecha_pago2: HTMLInputElement, agua2,  luz2: HTMLInputElement, gas2: HTMLInputElement,
-              expensas2: HTMLInputElement){
+              expensas2: HTMLInputElement, tasas11desc: HTMLInputElement, tasas11, tasas22desc: HTMLInputElement, tasas22, tasas33desc: HTMLInputElement, tasas33,
+              tasas44desc: HTMLInputElement, tasas44){
   const monto = monto2.value;
   // tslint:disable-next-line:no-unused-expression
   const honorarios = (monto2.value * honorarios2.value) / 100;
   const punitorios = punitorios2.value;
   // tslint:disable-next-line:variable-name
   const fecha_pago = fecha_pago2.value;
+
   let agua = agua2.value;
   if (agua === ''){
     agua = null;
     }
-    else{
-      agua = agua2.value;
+   
+
+    let luz = luz2.value;
+  if (luz === ''){
+    luz = null;
     }
-  const luz = luz2.value;
-  const gas = gas2.value;
-  const expensas = expensas2.value;
+  
+
+    let gas = gas2.value;
+    if (gas === ''){
+      gas = null;
+      }
+    
+      let expensas = expensas2.value;
+      if (expensas === ''){
+        expensas = null;
+        }
+   
+
+        let tasas1desc = tasas11desc.value;
+        if (tasas1desc === ''){
+          tasas1desc = null;
+          }
+      
+          let tasas1 = tasas11.value;
+        if (tasas1 === ''){
+          tasas1 = null;
+          }
+        
+
+          let tasas2desc = tasas22desc.value;
+          if (tasas2desc === ''){
+            tasas2desc = null;
+          }
+            let tasas2 = tasas22.value;
+          if (tasas2 === ''){
+            tasas2 = null;
+            }
+         
+
+            let tasas3desc = tasas33desc.value;
+            if (tasas3desc === ''){
+              tasas3desc = null;
+              }
+          
+              let tasas3 = tasas33.value;
+            if (tasas3 === ''){
+              tasas3 = null;
+              }
+
+              let tasas4desc = tasas44desc.value;
+              if (tasas4desc === ''){
+                tasas4desc = null;
+                }
+            
+                let tasas4 = tasas44.value;
+              if (tasas4 === ''){
+                tasas4 = null;
+                }
+            
+  /*const tasas1descripcion = tasas11desc.value;
+  const tasas1 = tasas11;
+  const tasas2descripcion = tasas22desc.value;
+  const tasas2 = tasas22;
+  const tasas3descripcion = tasas33desc.value;
+  const tasas3 = tasas33;
+  */
   const contrato = this.id;
   const val = {
     monto,
@@ -69,6 +132,14 @@ export class PagoAddPage implements OnInit {
     luz,
     gas,
     expensas,
+    tasas1desc,
+    tasas1,
+    tasas2desc,
+    tasas2,
+    tasas3desc,
+    tasas3,
+    tasas4desc,
+    tasas4,
     contrato
   };
   this.pagoService.addPago(val).subscribe(res => {

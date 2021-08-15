@@ -21,6 +21,7 @@ export class ContratoDetallePage implements OnInit {
   inquilino: Persona;
   garante: Persona;
   propiedad: Propiedad;
+  contratoId: any;
   // tslint:disable-next-line:max-line-length
   constructor(private propiedadService: PropiedadesService, private inquilinoService: InquilinosService, private garanteService: GarantesService, private locadorService: LocadoresService, private activatedRoute: ActivatedRoute, private contratoService: ContratosService, private router: Router, private alertCtrl: AlertController) { }
 
@@ -31,6 +32,7 @@ export class ContratoDetallePage implements OnInit {
         this.router.navigate(['/contratos']);
       }
       const recipeId = paramMap.get('contratoId');
+      this.contratoId = recipeId;
       this.contratoService.getContrato(recipeId)
     .subscribe(data => {
       this.contratos = data;
@@ -79,4 +81,8 @@ export class ContratoDetallePage implements OnInit {
   });
   await alertElement.present();
  }
+
+ updateContrato(contratoId){
+  this.router.navigate(['/contrato-update', contratoId])
+}
  }

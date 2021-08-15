@@ -84,6 +84,9 @@ export class ContratosPage implements OnInit {
     this.router.navigate(['/pagos', contratoId]);
     }
 
+  updateContrato(contratoId){
+    this.router.navigate(['/contrato-update', contratoId])
+  }
   verContrato(contratoId){
     this.router.navigate(['/contratos', contratoId]);
   }

@@ -23,22 +23,18 @@ export class PagosPage implements OnInit {
 
 
   ngOnInit() {
-   /* this.activatedRoute.data.subscribe((data) => {
-      this.pagos = data.pagos;
-      console.log(this.pagos.propiedadId);
-    }); */
+ 
 
       this.pagoService.getPagos()
     .subscribe(data => {
       this.pagos = data;
-      this.propiedadNombre = this.propiedadesService.getPropiedadId(data.propiedad).ubicacion
-     // this.propiedadId = this.contratoService.getContratoId(data.contrato).propiedad;
+      this.propiedadNombre = this.propiedadesService.getPropiedadId(data.propiedad).ubicacion;
+
      
   });
   this.pagoService.getPagos()
   .subscribe(data => {
     this.pagos = data;
-   // this.propiedadNombre = this.propiedadesService.getPropiedadId(data.propiedad).ubicacion
     this.propiedadId = this.contratoService.getContratoId(data.contrato).propiedad;
    
 });
@@ -55,10 +51,6 @@ export class PagosPage implements OnInit {
       gas: pago.gas,
       expensas: pago.expensas,
       contrato: pago.contrato,
-      // propiedadId: this.contratoService.getContratoId(pago.contrato).propiedad,
-      // propiedadName: this.propiedadesService.getNombrePropiedad(pago.contrato)
-     // propiedadName: this.propiedadesService.getPropiedadId(this.contratoService.getContratoId(pago.contrato).propiedad).ubicacion,
-     // propiedadId: this.contratoService.getContratoId(pago.contrato).propiedad,
     };
     });
     console.log(this.pagos);
@@ -68,7 +60,6 @@ export class PagosPage implements OnInit {
 
 
   ionViewDidEnter() {
-    //this.pagoService.guardarDatos();
     this.pagos = this.pagoService.guardarDatos().map(pago => {
     return {
       id: pago.id,
@@ -81,7 +72,6 @@ export class PagosPage implements OnInit {
       gas: pago.gas,
       expensas: pago.expensas,
       contrato: pago.contrato,
-     // propiedadId: this.contratoService.getContratoId(pago.contrato).propiedad,
       propiedadName: this.propiedadesService.getPropiedadId(this.contratoService.getContratoId(pago.contrato).propiedad).ubicacion,
     };
     });

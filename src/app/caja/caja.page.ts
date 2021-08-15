@@ -20,7 +20,4 @@ export class CajaPage implements OnInit {
     this.router.navigate(['/caja-pagos']);
   }
 
-  cierre_caja(){
-    this.router.navigate(['/cierre-caja']);
-  }
 }

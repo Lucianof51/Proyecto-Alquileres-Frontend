@@ -64,8 +64,9 @@ export class PagosPage implements OnInit {
   updatePagos(pagoId){
     this.router.navigate(['/pago-update', this.id, pagoId]);
     }
-  verPagos(pagoId){
-    this.router.navigate(['/pagos', this.id, pagoId]);
+  verPagos(pagoId, contratoId){
+    contratoId= this.id;
+    this.router.navigate(['/pagos', contratoId, pagoId]);
     }
 
 }

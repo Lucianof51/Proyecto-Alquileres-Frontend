@@ -93,13 +93,7 @@ getDia(index){
     mes[11] = 'Diciembre';
     return mes[index];
   }
-    // this.array.fechas = this.a;
-    // tslint:disable-next-line:new-parens
-    // this.a = this.array[this.array.fechas];
-    // const f = new Date(this.a).toDateString();
-    // this.pruebas.fechas = getMes(this.a.getMoth());
-    // this.pruebas = this.array;
-    // console.log(this.pruebas);
+
     const d = new Date();
     this.m2 = getMes2(d.getMonth());
     this.m = getMes(d.getMonth());
@@ -114,13 +108,11 @@ getDia(index){
     .subscribe(data => {
       this.pagos = data;
       this.propiedadNombre = this.propiedadService.getPropiedadId(data.propiedad).ubicacion
-     // this.propiedadId = this.contratoService.getContratoId(data.contrato).propiedad;
      
   });
   this.pagoService.getPagos()
   .subscribe(data => {
     this.pagos = data;
-   // this.propiedadNombre = this.propiedadesService.getPropiedadId(data.propiedad).ubicacion
     this.propiedadId = this.contratosService.getContratoId(data.contrato).propiedad;
    
 });

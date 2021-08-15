@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProveedoresService } from './proveedores.service';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { Persona } from '../persona.model';
+
 
 @Component({
   selector: 'app-proveedores',
@@ -11,7 +13,8 @@ import { MenuController } from '@ionic/angular';
 export class ProveedoresPage implements OnInit {
 
   constructor(private proveedoresService: ProveedoresService, private router: Router , private menuCtrl: MenuController) { }
-  proveedores = [];
+  proveedores: Persona;
+
   ngOnInit() {
     this.proveedoresService.getProveedores()
     .subscribe(data => {
@@ -52,4 +55,5 @@ export class ProveedoresPage implements OnInit {
         event.target.complete();
       }, 2000);
     }
+
 }

@@ -53,7 +53,7 @@ export class MovimientosPage implements OnInit {
     console.log(this.movimientos2);
     this.movimientos = this.movimientos.concat(this.movimientos2);
     this.movimientos = this.movimientos.sort(function(a,b){
-    return  new Date(a.fechaPago).getTime() - new Date(b.fechaPago).getTime();
+    return  new Date(b.fechaPago).getTime() - new Date(a.fechaPago).getTime();
     });
     console.log(this.movimientos);
     });

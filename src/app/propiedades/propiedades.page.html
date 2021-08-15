@@ -17,10 +17,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh(event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
     <ion-item-group *ngFor='let propiedad of propiedades; index as i'>
       <ion-item *ngIf="(i+1)%2 == 0" color="color">
         <ion-icon slot="start" name="home-outline"></ion-icon>
@@ -38,7 +38,7 @@
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="addPago()">
+    <ion-fab-button color="danger" (click)="addNewPlace()">
       <ion-icon name="add"></ion-icon>  
     </ion-fab-button>
   </ion-fab>

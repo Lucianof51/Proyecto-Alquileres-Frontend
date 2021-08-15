@@ -1,9 +1,142 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>contrato-update</ion-title>
+  <ion-toolbar color="colortres">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/contratos">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar contrato</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <ion-card color="dark">
+    <div class="ion-padding">
+      <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+
+        <ion-item color="dark">
+          <ion-label position="floating">Valor</ion-label>
+          <ion-input autocapitalize inputmode="number"  formControlName="valor" [(ngModel)]="valor2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.valor">
+          <ng-container *ngIf="valor.hasError(error.type) && (valor.dirty || valor.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item color="dark">
+          <ion-label position="floating">Honorarios en %</ion-label>
+          <ion-input autocapitalize inputmode="number"  formControlName="honorarios" [(ngModel)]="honorarios2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.honorarios">
+          <ng-container *ngIf="honorarios.hasError(error.type) && (honorarios.dirty || honorarios.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item color="dark">
+          <ion-label position="floating">Punitorios</ion-label>
+          <ion-input autocapitalize inputmode="number"  formControlName="punitorios" [(ngModel)]="punitorios2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.punitorios">
+          <ng-container *ngIf="punitorios.hasError(error.type) && (punitorios.dirty || punitorios.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item color="dark">
+          <ion-label position="stacked">Fecha de ingreso</ion-label>
+          <ion-input type="date" formControlName="fecha_ingreso" [(ngModel)]="fecha_ingreso2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.fecha_ingreso">
+          <ng-container *ngIf="fecha_ingreso.hasError(error.type) && (fecha_ingreso.dirty || fecha_ingreso.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item color="dark">
+          <ion-label position="stacked">Fecha de egreso</ion-label>
+          <ion-input type="date" formControlName="fecha_egreso" [(ngModel)]="fecha_egreso2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.fecha_egreso">
+          <ng-container *ngIf="fecha_egreso.hasError(error.type) && (fecha_egreso.dirty || fecha_egreso.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item color="dark">
+          <ion-label position="stacked">Fecha de rescisión</ion-label>
+          <ion-input type="date" formControlName="fecha_rescision" [(ngModel)]="fecha_rescision2"></ion-input>
+        </ion-item>
+        
+        <ion-item color="dark">
+          <ion-label position="floating">Tipo de contrato</ion-label>
+          <ion-input autocapitalize inputmode="text" formControlName="tipo_contrato" [(ngModel)]="tipo_contrato2"></ion-input>
+        </ion-item>
+    
+        <ion-item color="dark">
+          <ion-label position="floating">Vencimiento de pago "dia":</ion-label>
+          <ion-input autocapitalize inputmode="number" formControlName="vencimiento_pago" [(ngModel)]="vencimiento_pago2"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.vencimiento_pago">
+          <ng-container *ngIf="vencimiento_pago.hasError(error.type) && (vencimiento_pago.dirty || vencimiento_pago.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+  <ion-item color="dark">
+    <ion-label>Propiedad</ion-label>
+    <ion-select formControlName="propiedad" [(ngModel)]="propiedad2">
+      <ion-select-option *ngFor="let propiedad of propiedades" value="{{propiedad.id}}">{{propiedad.ubicacion}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngFor="let error of errorMessages.propiedad">
+    <ng-container *ngIf="propiedad.hasError(error.type) && (propiedad.dirty || propiedad.touched)">
+      <small class="error-message">{{error.message}}</small>
+    </ng-container>
+  </div>
+    
+  <ion-item color="dark">
+    <ion-label>Locador</ion-label>
+    <ion-select formControlName="locador" [(ngModel)]="locador2">
+      <ion-select-option *ngFor="let locador of locadores" value="{{locador.id}}">{{locador.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngFor="let error of errorMessages.locador">
+    <ng-container *ngIf="locador.hasError(error.type) && (locador.dirty || locador.touched)">
+      <small class="error-message">{{error.message}}</small>
+    </ng-container>
+  </div>
+  
+  <ion-item color="dark">
+    <ion-label>Inquilino</ion-label>
+    <ion-select formControlName="inquilino" [(ngModel)]="inquilino2">
+      <ion-select-option *ngFor="let inquilino of inquilinos" value="{{inquilino.id}}">{{inquilino.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngFor="let error of errorMessages.inquilino">
+    <ng-container *ngIf="inquilino.hasError(error.type) && (inquilino.dirty || inquilino.touched)">
+      <small class="error-message">{{error.message}}</small>
+    </ng-container>
+  </div>
+
+<ion-item color="dark">
+  <ion-label>Garante</ion-label>
+  <ion-select formControlName="garante" [(ngModel)]="garante2">
+    <ion-select-option *ngFor="let garante of garantes" value="{{garante.id}}">{{garante.nombre}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<div *ngFor="let error of errorMessages.garante">
+  <ng-container *ngIf="garante.hasError(error.type) && (garante.dirty || garante.touched)">
+    <small class="error-message">{{error.message}}</small>
+  </ng-container>
+</div>
+
+<ion-button [disabled]="!registrationForm.valid" type="submit" expand="block">AGREGAR <ion-icon slot="end"
+  name="create">
+</ion-icon>
+</ion-button>
+</form>
+</div>
+</ion-card>
 </ion-content>

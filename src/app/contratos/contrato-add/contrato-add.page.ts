@@ -6,6 +6,8 @@ import {PropiedadesService} from '../../propiedades/propiedades.service';
 import {ContratosService} from '../contratos.service';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-contrato-add',
   templateUrl: './contrato-add.page.html',
@@ -16,7 +18,7 @@ export class ContratoAddPage implements OnInit {
   constructor(private garantesService: GarantesService, private propiedadesService: PropiedadesService,
               private locadoresService: LocadoresService, private contratoService: ContratosService,
               private inquilinosService: InquilinosService,
-              private activatedRoute: ActivatedRoute, private router: Router, private alertCtrl: AlertController) { }
+              private activatedRoute: ActivatedRoute, private router: Router, private alertCtrl: AlertController, private formBuilder: FormBuilder) { }
   propiedades = [];
   garantes = [];
   locadores = [];
@@ -47,74 +49,134 @@ export class ContratoAddPage implements OnInit {
       this.garantes = data;
     });
   }
-  // tslint:disable-next-line:variable-name
-  async saveNewContrato(valor2, honorarios2, punitorios2: HTMLInputElement,
-                  // tslint:disable-next-line:variable-name
-                  fecha_ingreso2: HTMLInputElement, fecha_egreso2: HTMLInputElement, fecha_rescision2: HTMLInputElement,
-                  // tslint:disable-next-line:variable-name
-                  tipo_contrato2: HTMLInputElement, vencimiento_pago2: HTMLInputElement, propiedad2: HTMLInputElement,
-                  locador2: HTMLInputElement, inquilino2: HTMLInputElement, garante2: HTMLInputElement)
-                  {
-                  const valor = valor2.value;
-                  // tslint:disable-next-line:no-unused-expression
-                  const honorarios = (valor2.value * honorarios2.value) / 100;
-                  const punitorios = punitorios2.value;
-                  // tslint:disable-next-line:variable-name
-                  const fecha_ingreso = fecha_ingreso2.value;
-                  // tslint:disable-next-line:variable-name
-                  const fecha_egreso = fecha_egreso2.value;
-                  // tslint:disable-next-line:variable-name
-                  const fecha_rescision = fecha_rescision2.value;
-                  // tslint:disable-next-line:variable-name
-                  const tipo_contrato = tipo_contrato2.value;
-                  // tslint:disable-next-line:variable-name
-                  const vencimiento_pago = vencimiento_pago2.value;
-                  const propiedad = propiedad2.value;
-                  const locador = locador2.value;
-                  const inquilino = inquilino2.value;
-                  const garante = garante2.value;
 
-                  const val = {
-                    valor,
-                    honorarios,
-                    punitorios,
-                    fecha_ingreso,
-                    fecha_egreso,
-                    fecha_rescision,
-                    tipo_contrato,
-                    vencimiento_pago,
-                    propiedad,
-                    locador,
-                    inquilino,
-                    garante };
+  get valor() {
+    return this.registrationForm.get("valor");
+  }
+  get honorarios() {
+    return this.registrationForm.get("honorarios");
+  }
+  get punitorios() {
+    return this.registrationForm.get("punitorios");
+  }
+  get fecha_ingreso() {
+    return this.registrationForm.get("fecha_ingreso");
+  }
+  
+  get fecha_egreso() {
+    return this.registrationForm.get("fecha_egreso");
+  }
+  
+  get fecha_rescision() {
+    return this.registrationForm.get("fecha_rescision");
+  }
+  get tipo_contrato() {
+    return this.registrationForm.get("tipo_contrato");
+  }
+  get vencimiento_pago() {
+    return this.registrationForm.get("vencimiento_pago");
+  }
+  get propiedad() {
+    return this.registrationForm.get("propiedad");
+  }
 
-                  this.contratoService.addContrato(val).subscribe(res => {
-                    alert(res.toString());
-                });
-                this.propiedadesService.getPropiedad(propiedad2.value).subscribe(data=>{
-                  const id = propiedad2.value;
-                  const val = {
-                    id,
-                    ubicacion: data.ubicacion,
-                    estado: 'En alquiler',
-                    tipo: data.tipo
-                  }
-                  this.propiedadesService.updatePropiedad(val).subscribe(res => {
-                    alert(res.toString());
-                });
-                });
-                const alertElement = await this.alertCtrl.create({
-                  header: 'Contrato creado',
-                  message: 'Tu contrato se ha generado con exito',
-                  buttons: [
-                    {
-                      text: 'OK',
-                      handler: () => {
-                        this.router.navigate(['/contratos']);
-                      }
-                    }
-                  ]
-                });
-                await alertElement.present();
-                }
+  get locador() {
+    return this.registrationForm.get("locador");
+  }
+
+  get inquilino() {
+    return this.registrationForm.get("inquilino");
+  }
+
+  get garante() {
+    return this.registrationForm.get("garante");
+  }
+
+  public errorMessages = {
+    valor: [
+      {type: 'required', message: 'Valor requerido'},
+      { type: 'pattern', message: 'Ingrese un valor valido' }
+    ],
+    honorarios: [
+      {type: 'required', message: 'Honorarios requerido'},
+      { type: 'pattern', message: 'Ingrese un valor valido' }
+    ],
+    punitorios: [
+      {type: 'required', message: 'Punitorios requerido'},
+      { type: 'pattern', message: 'Ingrese un valor valido' }
+    ],
+    fecha_ingreso: [
+      {type: 'required', message: 'Fecha de ingreso requerida'},
+    ],
+    fecha_egreso: [
+      {type: 'required', message: 'Fecha de egreso requerida'},
+    ],
+    vencimiento_pago: [
+      {type: 'required', message: 'Ingrese el dia del vencimiento de pago'},
+      { type: 'pattern', message: 'Ingrese un valor valido' }
+    ],
+    propiedad: [
+      {type: 'required', message: 'Propiedad requerida'}
+    ],
+    locador: [
+      {type: 'required', message: 'Locador requerido'}
+    ],
+    inquilino: [
+      {type: 'required', message: 'Inquilino requerido'}
+    ],
+    garante: [
+      {type: 'required', message: 'Garante requerido'}
+    ]
+
+  }
+
+  registrationForm = this.formBuilder.group({
+    valor: ['', 
+    [
+      Validators.required,
+      Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+    ]],
+    honorarios: ['', 
+    [
+      Validators.required,
+      Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+    ]],
+    punitorios: ['', 
+    [
+      Validators.required,
+      Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+    ]],
+    fecha_ingreso: ['', [Validators.required]],
+    fecha_egreso: ['', [Validators.required]],
+    fecha_rescision: [''],
+    tipo_contrato: [''],
+    vencimiento_pago: ['',  [
+      Validators.required,
+      Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+    ]],
+    propiedad: ['', [Validators.required]],
+    locador: ['', [Validators.required]],
+    inquilino: ['', [Validators.required]],
+    garante: ['', [Validators.required]]
+  });
+
+  public async submit() {
+    this.contratoService.addContrato(this.registrationForm.value).subscribe(res => {
+      alert(res.toString());
+  });
+    const alertElement = await this.alertCtrl.create({
+      header: 'Contrato creado',
+      message: 'Tu contrato se ha generado con exito',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/contratos']);
+          }
+        }
+      ]
+    });
+    await alertElement.present();
+  }
+  
 }

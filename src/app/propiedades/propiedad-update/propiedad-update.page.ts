@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PropiedadesService } from '../propiedades.service';
@@ -9,12 +10,15 @@ import { PropiedadesService } from '../propiedades.service';
   styleUrls: ['./propiedad-update.page.scss'],
 })
 export class PropiedadUpdatePage implements OnInit {
+ 
 
   constructor(private propiedadService: PropiedadesService,
               private router: Router,
-              private activatedRoute: ActivatedRoute, private alertCtrl: AlertController) { }
+              private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, private formBuilder: FormBuilder) { }
 
   id2: any;
+
+
    ngOnInit() {
      this.activatedRoute.paramMap.subscribe(paramMap => {
        if (!paramMap.has('propiedadId')) {
@@ -22,39 +26,72 @@ export class PropiedadUpdatePage implements OnInit {
          this.router.navigate(['/propiedades']);
        }
        const recipeId = paramMap.get('propiedadId');
-       console.log(recipeId);
        this.id2 = recipeId;
    });
  }
 
-  async savePropiedad(ubicacion2: HTMLInputElement, estado2: HTMLInputElement, tipo2: HTMLInputElement){
-    const ubicacion = ubicacion2.value;
-    const estado = estado2.value;
-    const tipo = tipo2.value;
-    const id = this.id2;
+get ubicacion() {
+  return this.registrationForm.get("ubicacion");
+}
+get tipo() {
+  return this.registrationForm.get('tipo');
+}
+get estado() {
+  return this.registrationForm.get('estado');
+}
+get id() {
+  return this.id2;
+}  
+public errorMessages = {
+  ubicacion: [
+    { type: 'required', message: 'Ubicación es requerida' }
+  ],
+  tipo: [
+    { type: 'required', message: 'Tipo de propiedad es requerido' }
+  ],
+  estado: [
+    { type: 'required', message: 'Estado es requerido' }
+  ]
+};
 
-    const val = {
-      id,
-     ubicacion,
-     estado,
-     tipo
-    };
-    this.propiedadService.updatePropiedad(val).subscribe(res => {
-       alert(res.toString());
-   });
-   const alertElement = await this.alertCtrl.create({
-    header: 'Propiedad actualizada',
-    message: 'Los datos de la propiedad se ha actualizado con exito',
-    buttons: [
-      {
-        text: 'OK',
-        handler: () => {
-          this.router.navigate(['/propiedades']);
-        }
-      }
+ registrationForm = this.formBuilder.group({
+  id : [''],
+  ubicacion: ['', [Validators.required]],
+  tipo: [
+    '',
+    [
+      Validators.required
     ]
-   });
-   await alertElement.present();
-       console.log(val);
-   }
+  ],
+  estado: [
+    '',
+    [
+      Validators.required
+    ]
+  ]
+});
+
+
+public async submit() {
+  console.log(this.id);
+  this.registrationForm.value.id = this.id; 
+  console.log(this.registrationForm.value);
+  this.propiedadService.updatePropiedad(this.registrationForm.value).subscribe(res => {
+    alert(res.toString());
+});
+const alertElement = await this.alertCtrl.create({
+  header: 'Propiedad actualizada',
+  message: 'Los datos de la propiedad se ha actualizado con exito',
+  buttons: [
+    {
+      text: 'OK',
+      handler: () => {
+        this.router.navigate(['/propiedades']);
+      }
+    }
+  ]
+ });
+ await alertElement.present();
+
+}
  }

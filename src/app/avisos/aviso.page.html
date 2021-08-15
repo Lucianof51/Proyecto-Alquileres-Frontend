@@ -10,27 +10,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item-group *ngFor='let aviso of avisos; index as i'>
-      <ion-item *ngIf="(i+1)%2 == 0" color="color">
-        <ion-button slot="end" color="success" (click)="updateAviso(aviso.id)">ACTUALIZAR</ion-button>
-        <ion-button slot="end" color="primary" (click)="verAviso(aviso.id)">VER</ion-button>
-        <ion-label>{{aviso.motivo}}</ion-label>
-      </ion-item>
-      <ion-item *ngIf="(i+1)%2 != 0" color="colordos">
-        <ion-button slot="end" color="success" (click)="updateAviso(aviso.id)">ACTUALIZAR</ion-button>
-        <ion-button slot="end" color="primary" (click)="verAviso(aviso.id)">VER</ion-button>
-        <ion-label>{{aviso.motivo}}</ion-label>
-      </ion-item>
-      
-    </ion-item-group>
-  </ion-list>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="addNewAviso()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
+<ion-content padding>
+  <ion-card color="dark">
+    <ion-item color="dark">
+      <ion-label color="primary">Asunto</ion-label>
+      <ion-input [(ngModel)]="subject" type="text"></ion-input>
+    </ion-item>
+   <ion-item color="dark">
+    <ion-textarea [(ngModel)]="body" placeholder="Contenido"></ion-textarea>
+   </ion-item>
+    <h5><ion-label color="primary"><pre>    Para</pre></ion-label></h5>
+    <ion-select [(ngModel)]="to">
+      <ion-select-option *ngFor="let emails of emailsinq" value="{{emails.email}}">{{emails.nombre}} {{emails.apellido}}, Email: {{emails.email}}</ion-select-option>
+    </ion-select>
+   
+    <ion-button ion-button block (click)="Enviar()">Enviar</ion-button>
+</ion-card>
 </ion-content>

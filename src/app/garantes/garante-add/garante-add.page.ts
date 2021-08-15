@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GarantesService } from '../garantes.service';
 import { AlertController } from '@ionic/angular';
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-garante-add',
   templateUrl: './garante-add.page.html',
@@ -9,38 +10,106 @@ import { AlertController } from '@ionic/angular';
 })
 export class GaranteAddPage implements OnInit {
 
-  constructor(private garanteService: GarantesService, private router: Router, private alertCtrl: AlertController) { }
-
+  constructor(private garanteService: GarantesService, private router: Router, private alertCtrl: AlertController, private formBuilder: FormBuilder) { }
+  
   ngOnInit() {
   }
 
-  // tslint:disable-next-line:max-line-length
-  async saveNewGarante(nombre2: HTMLInputElement, apellido2: HTMLInputElement, DNI2: HTMLInputElement, CUIT2: HTMLInputElement, telefono2: HTMLInputElement, direccion2: HTMLInputElement,
-  // tslint:disable-next-line:align
-  email2: HTMLInputElement, cuentaBancaria2: HTMLInputElement){
-    const nombre = nombre2.value;
-    const apellido = apellido2.value;
-    const DNI = DNI2.value;
-    const CUIT = CUIT2.value;
-    const telefono = telefono2.value;
-    const direccion = direccion2.value;
-    const email = email2.value;
-    // tslint:disable-next-line:variable-name
-    const cuenta_bancaria = cuentaBancaria2.value;
-    const val = {
-      nombre,
-      apellido,
-      DNI,
-      CUIT,
-      telefono,
-      direccion,
-      email,
-      cuenta_bancaria
-    };
-    this.garanteService.addGarante(val).subscribe(res => {
-       alert(res.toString());
-   });
-   const alertElement = await this.alertCtrl.create({
+  get nombre() {
+    return this.registrationForm.get("nombre");
+  }
+  get apellido() {
+    return this.registrationForm.get("apellido");
+  }
+  get DNI() {
+    return this.registrationForm.get("DNI");
+  }
+  get CUIT() {
+    return this.registrationForm.get("CUIT");
+  }
+  get telefono() {
+    return this.registrationForm.get("telefono");
+  }
+  get direccion() {
+    return this.registrationForm.get("direccion");
+  }
+  get email() {
+    return this.registrationForm.get("email");
+  }
+  get cuenta_bancaria() {
+    return this.registrationForm.get("cuenta_bancaria");
+  }
+
+  public errorMessages = {
+    nombre: [
+      { type: 'required', message: 'Nombre es requerido' },
+      { type: 'maxlength', message: 'Nombre no puede tener mas de 100 caracteres' }
+    ],
+    apellido: [
+      { type: 'required', message: 'Apellido es requerido' },
+      { type: 'maxlength', message: 'Apellido no puede tener mas de 100 caracteres' }
+    ],
+    DNI: [
+      { type: 'required', message: 'DNI es requerido' },
+      { type: 'maxlength', message: 'DNI no puede tener mas de 9 caracteres' }
+    ],
+    CUIT: [
+      { type: 'required', message: 'CUIT es requerido' },
+      { type: 'pattern', message: 'Ingrese un CUIT valido' }
+    ],
+    telefono: [
+      { type: 'required', message: 'Telefono es requerido' },
+      { type: 'pattern', message: 'Ingrese un numero de telefono valido' }
+    ],
+    direccion: [
+      { type: 'required', message: 'Direccion es requerido' },
+      { type: 'maxlength', message: 'Direccion no puede tener mas de 100 caracteres' }
+    ],
+    email: [
+      { type: 'required', message: 'Email es requerido' },
+      { type: 'pattern', message: 'Ingrese un email valido' }
+    ],
+    cuenta_bancaria: [
+      { type: 'required', message: 'Cuenta bancaria es requerida' },
+      { type: 'maxlength', message: 'Cuenta bancaria no puede tener mas de 100 caracteres' }
+    ],
+  }
+
+  registrationForm = this.formBuilder.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    apellido: ['', [Validators.required, Validators.maxLength(100)]],
+    DNI: ['', [Validators.required, Validators.maxLength(12)]],
+    CUIT: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+      ]
+    ],
+    telefono: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$')
+      ]
+    ],
+    direccion: ['', [Validators.required, Validators.maxLength(100)]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')
+      ]
+    ],
+    cuenta_bancaria: ['', [Validators.required, Validators.maxLength(100)]]
+  });
+
+  public async submit() {
+    console.log(this.registrationForm.value);
+    this.garanteService.addGarante(this.registrationForm.value).subscribe(res => {
+      alert(res.toString());
+  });
+  const alertElement = await this.alertCtrl.create({
     header: 'Garante registrado',
     message: 'El garante se ha registrado con exito',
     buttons: [
@@ -53,5 +122,5 @@ export class GaranteAddPage implements OnInit {
     ]
   });
   await alertElement.present();
-}
+  }
 }

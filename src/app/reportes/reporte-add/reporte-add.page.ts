@@ -46,7 +46,7 @@ const estado = estado2.value;
 const fecha = fecha2.value;
 const proveedor = proveedor2.value;
 const propiedad = propiedad2.value;
-const costo = costo2.value
+const costo = costo2.value;
 
 // console.log(descripcion, estado, fecha, proveedor, propiedad, costo, cover);
 const uploadData = new FormData();

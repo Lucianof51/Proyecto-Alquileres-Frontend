@@ -30,7 +30,22 @@ export class PagoUpdatePage implements OnInit {
     });
     });
   }
-
+  ionViewWillEnter() {
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('pagoId')) {
+        // redirect
+        this.router.navigate(['/pago-update']);
+      }
+      const recipeId = paramMap.get('pagoId');
+      console.log(recipeId);
+      this.id = recipeId;
+      this.pagoService.getPago(recipeId)
+    .subscribe(data => {
+      this.pago = data;
+      console.log(this.pago);
+    });
+    });
+  }
 
   async saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
     // tslint:disable-next-line:variable-name

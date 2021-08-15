@@ -12,10 +12,6 @@ const routes: Routes = [
     path: 'pagos',
     loadChildren: () => import('./pagos/pagos.module').then( m => m.PagosPageModule)
   },
-  {
-    path: 'cierre-caja',
-    loadChildren: () => import('./cierre-caja/cierre-caja.module').then( m => m.CierreCajaPageModule)
-  }
 ];
 
 @NgModule({

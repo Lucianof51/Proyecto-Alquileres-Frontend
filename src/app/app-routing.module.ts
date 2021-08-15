@@ -12,6 +12,15 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'contrato-update',
+    children: [
+      {
+        path: ':contratoId',
+        loadChildren: () => import('./contratos/contrato-update/contrato-update.module').then(m => m.ContratoUpdatePageModule)
+    },
+    ]
+  },
+  {
     path: 'propiedades',
     children: [
       {
@@ -277,11 +286,6 @@ const routes: Routes = [
   {
     path: 'caja-pagos',
     loadChildren: () => import('./caja/pagos/pagos.module').then( m => m.PagosPageModule),
-  },
-
-  {
-    path: 'cierre-caja',
-    loadChildren: () => import('./caja/cierre-caja/cierre-caja.module').then( m => m.CierreCajaPageModule)
   },
 
   {

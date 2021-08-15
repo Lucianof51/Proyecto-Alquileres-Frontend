@@ -27,6 +27,9 @@ export class ContratosService {
     return this.http.post(this.APIurl + '/contrato', val);
   }
 
+  updateContrato(contratos: Contrato) {
+    return this.http.put(this.APIurl + '/contrato/' + contratos.id, contratos);
+  }
   deleteContrato(contratoId){
     return this.http.delete(this.APIurl + '/contrato/' + contratoId, { headers: this.httpHeaders }).toPromise()
     .then(() => {
