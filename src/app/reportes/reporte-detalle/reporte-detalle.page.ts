@@ -51,7 +51,7 @@ export class ReporteDetallePage implements OnInit {
  async deleteReporte(){
  const alertElement = await this.alertCtrl.create({
    header: 'Estas seguro de querer eliminar',
-   message: 'Se cuidadoso',
+   
    buttons: [
      {
       text: 'Cancel',

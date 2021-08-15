@@ -33,7 +33,7 @@ export class GaranteDetallePage implements OnInit {
  async deleteGarante(){
  const alertElement = await this.alertCtrl.create({
    header: 'Estas seguro de querer eliminar',
-   message: 'Se cuidadoso',
+   
    buttons: [
      {
       text: 'Cancel',

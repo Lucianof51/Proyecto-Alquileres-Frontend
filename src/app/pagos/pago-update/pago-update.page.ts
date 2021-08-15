@@ -51,6 +51,7 @@ export class PagoUpdatePage implements OnInit {
     // tslint:disable-next-line:variable-name
               fecha_pago2: HTMLInputElement, agua2,  luz2: HTMLInputElement, gas2: HTMLInputElement,
               expensas2: HTMLInputElement){
+  const id = this.id;
   const monto = monto2.value;
   // tslint:disable-next-line:no-unused-expression
   const honorarios = (monto2.value * honorarios2.value) / 100;
@@ -64,11 +65,23 @@ export class PagoUpdatePage implements OnInit {
     else{
       agua = agua2.value;
     }
-  const luz = luz2.value;
-  const gas = gas2.value;
-  const expensas = expensas2.value;
-  const contrato = this.id;
+  let luz = luz2.value;
+  if (luz === ''){
+      luz = null;
+      }
+      
+  let gas = gas2.value;
+  if (gas === ''){
+    gas = null;
+    }
+  let expensas = expensas2.value;
+  if (expensas === ''){
+    expensas = null;
+    }
+
+  const contrato = this.pago.contrato;
   const val = {
+    id,
     monto,
     honorarios,
     punitorios,
@@ -79,21 +92,35 @@ export class PagoUpdatePage implements OnInit {
     expensas,
     contrato
   };
-  this.pagoService.updatePago(val).subscribe(res => {
+  this.pagoService.updatePago(val).subscribe(async res => {
     alert(res.toString());
-  });
-  const alertElement = await this.alertCtrl.create({
-    header: 'Pago actualizado',
-    message: 'Tu pago se ha actualizado con exito',
-    buttons: [
-      {
-        text: 'OK',
-        handler: () => {
-          this.router.navigate(['/pagos', this.id]);
+    const alertElement = await this.alertCtrl.create({
+      header: 'Pago actualizado',
+      message: 'Tu pago se ha actualizado con exito',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/pagos', this.pago.contrato]);
+          }
         }
-      }
-    ]
-  });
-  await alertElement.present();
+      ]
+    });
+    await alertElement.present();
+  },
+  async err => {
+    const alertElement = await this.alertCtrl.create({
+      header: 'Error al actualizar pago',
+      message: 'No ha ingresado los datos correctos',
+      buttons: [
+        {
+          text: 'OK',
+        }
+      ]
+    });
+    await alertElement.present();
+  }
+  );
+  
   }
 }

@@ -39,7 +39,7 @@ export class PagoAddPage implements OnInit {
   setState(arg0: { input: any; }) {
     throw new Error('Method not implemented.');
   }
-  async saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
+public saveNewPago(monto2, honorarios2, punitorios2: HTMLInputElement,
     // tslint:disable-next-line:variable-name
               fecha_pago2: HTMLInputElement, agua2,  luz2: HTMLInputElement, gas2: HTMLInputElement,
               expensas2: HTMLInputElement, tasas11desc: HTMLInputElement, tasas11, tasas22desc: HTMLInputElement, tasas22, tasas33desc: HTMLInputElement, tasas33,
@@ -142,21 +142,35 @@ export class PagoAddPage implements OnInit {
     tasas4,
     contrato
   };
-  this.pagoService.addPago(val).subscribe(res => {
+  this.pagoService.addPago(val).subscribe(async res => {
     alert(res.toString());
-  });
-  const alertElement = await this.alertCtrl.create({
-    header: 'Pago registrado',
-    message: 'Tu pago se ha registrado con exito',
-    buttons: [
-      {
-        text: 'OK',
-        handler: () => {
-          this.router.navigate(['/pagos', this.id]);
+    const alertElement = await this.alertCtrl.create({
+      header: 'Pago registrado',
+      message: 'Tu pago se ha registrado con exito',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/pagos', this.id]);
+          }
         }
-      }
-    ]
-  });
-  await alertElement.present();
+      ]
+    });
+    await alertElement.present();
+  },
+  async err => {
+    const alertElement = await this.alertCtrl.create({
+      header: 'Error al agregar pago',
+      message: 'No ha ingresado los datos correctos',
+      buttons: [
+        {
+          text: 'OK',
+        }
+      ]
+    });
+    await alertElement.present();
+  }
+  );
+
   }
 }
